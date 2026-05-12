@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archivo del Gremio - Referencias Frikis</title>
+    <title>Archivo de Lore - Guía de Referencias</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -13,33 +13,35 @@
         .transition-page { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .hidden-section { display: none; opacity: 0; transform: translateY(10px); }
         
-        .glow-yellow { box-shadow: 0 0 20px rgba(234, 179, 8, 0.15); border-left: 4px solid #eab308; }
-        .glow-blue { box-shadow: 0 0 20px rgba(59, 130, 246, 0.15); border-left: 4px solid #3b82f6; }
-        .glow-green { box-shadow: 0 0 20px rgba(34, 197, 94, 0.15); border-left: 4px solid #22c55e; }
-        .glow-purple { box-shadow: 0 0 20px rgba(168, 85, 247, 0.15); border-left: 4px solid #a855f7; }
-        .glow-red { box-shadow: 0 0 20px rgba(239, 68, 68, 0.15); border-left: 4px solid #ef4444; }
+        /* Efectos de brillo por categorías */
+        .glow-gold { box-shadow: 0 0 20px rgba(234, 179, 8, 0.1); border-left: 4px solid #eab308; }
+        .glow-blue { box-shadow: 0 0 20px rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; }
+        .glow-green { box-shadow: 0 0 20px rgba(34, 197, 94, 0.1); border-left: 4px solid #22c55e; }
+        .glow-purple { box-shadow: 0 0 20px rgba(168, 85, 247, 0.1); border-left: 4px solid #a855f7; }
         
         .card-hover:hover { transform: scale(1.02); background: rgba(51, 65, 85, 0.8); }
+        
+        blockquote { border-left: 4px solid #64748b; padding-left: 1rem; font-style: italic; color: #94a3b8; }
     </style>
 </head>
 <body class="min-h-screen bg-slate-950 selection:bg-yellow-500/30">
 
-    <div id="app" class="max-w-md mx-auto p-4 md:p-6">
+    <div id="app" class="max-w-md mx-auto p-4 md:p-6 pb-20">
         
-        <header class="text-center py-10">
-            <h1 class="fandom-title text-3xl font-bold tracking-[0.2em] text-yellow-500 drop-shadow-md">ARCHIVO DEL GREMIO</h1>
-            <p class="text-slate-500 text-[10px] uppercase tracking-[0.4em] mt-3">Crónicas & Alquimia del Evento</p>
-            <div class="h-1 w-12 bg-yellow-600 mx-auto mt-4 rounded-full opacity-50"></div>
+        <header class="text-center py-12">
+            <h1 class="fandom-title text-3xl font-bold tracking-[0.2em] text-yellow-500 drop-shadow-md">ARCHIVO DE LORE</h1>
+            <p class="text-slate-500 text-[10px] uppercase tracking-[0.3em] mt-3">Guía para que no se te escape ni una referencia</p>
+            <div class="h-0.5 w-16 bg-gradient-to-r from-transparent via-yellow-600 to-transparent mx-auto mt-6 opacity-50"></div>
         </header>
 
         <!-- VISTA MENÚ -->
         <section id="view-menu" class="transition-page space-y-6">
             <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                <h2 class="text-lg font-semibold text-slate-200">Catálogo de Referencias</h2>
-                <span class="bg-slate-800 text-slate-400 text-[10px] px-2 py-1 rounded-md uppercase tracking-wider font-bold" id="item-count">0 ITEMS</span>
+                <h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest">Registros Detectados</h2>
+                <span class="bg-slate-800 text-yellow-500 text-[10px] px-2 py-1 rounded-md font-bold" id="item-count">0</span>
             </div>
             
-            <div id="menu-grid" class="grid grid-cols-1 gap-4 pb-20">
+            <div id="menu-grid" class="grid grid-cols-1 gap-4">
                 <!-- Inyectado por JS -->
             </div>
         </section>
@@ -52,7 +54,7 @@
                         <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                     </svg>
                 </div>
-                <span class="text-xs uppercase font-bold tracking-widest">Cerrar Archivo</span>
+                <span class="text-[10px] uppercase font-bold tracking-widest">Volver al Archivo</span>
             </button>
 
             <div id="detail-content">
@@ -64,112 +66,105 @@
 
     <script>
         const items = {
-            // MESAS / LUGARES
             "the-shire": {
                 title: "The Shire",
-                category: "Lugar (Mesa)",
-                fandom: "El Señor de los Anillos",
-                color: "green",
+                tags: ["Libro", "Película"],
+                origin: "El Señor de los Anillos / El Hobbit (J.R.R. Tolkien)",
+                detail: "Tierra fértil de colinas verdes y paz absoluta. El hogar de los Hobbits es famoso por su agricultura, su cerveza y sus banquetes. Es un lugar que representa la inocencia frente a la oscuridad del mundo.",
+                quote: "En un agujero en el suelo, vivía un hobbit. No un agujero húmedo, sucio y repugnante... era un agujero-hobbit, y eso significa comodidad.",
                 icon: "🌿",
-                lore: "Tierra fértil de colinas verdes y paz absoluta. El hogar de los Hobbits es famoso por su hierba para pipa y sus banquetes interminables.",
-                points: ["Agujeros Hobbit", "La Taberna del Dragón Verde", "El Viejo Bosque"],
-                images: ["https://placehold.co/600x400/166534/f1f5f9?text=La+Comarca"]
+                color: "green",
+                image: "https://placehold.co/600x400/064e3b/f1f5f9?text=La+Comarca"
             },
             "roshar": {
                 title: "Roshar",
-                category: "Lugar (Mesa)",
-                fandom: "El Archivo de las Tormentas",
-                color: "blue",
+                tags: ["Libro"],
+                origin: "El Archivo de las Tormentas (Brandon Sanderson)",
+                detail: "Un mundo de roca azotado por las Altas Tormentas. Aquí, la flora se retrae al tacto y la fauna se protege con caparazones. La Luz de Tormenta es la energía que alimenta el mundo y los poderes de los Caballeros Radiantes.",
+                quote: "Vida antes que muerte. Fuerza antes que debilidad. Viaje antes que destino.",
                 icon: "🌪️",
-                lore: "Un mundo de roca azotado por las Altas Tormentas, donde la flora se retrae al ser tocada y la luz de tormenta alimenta los poderes de los Caballeros Radiantes.",
-                points: ["Llanuras Quebradas", "Urithiru", "Spren de vida"],
-                images: ["https://placehold.co/600x400/1e40af/f1f5f9?text=Roshar"]
+                color: "blue",
+                image: "https://placehold.co/600x400/1e3a8a/f1f5f9?text=Roshar"
             },
             "hyrule": {
                 title: "Hyrule",
-                category: "Lugar (Mesa)",
-                fandom: "The Legend of Zelda",
-                color: "green",
+                tags: ["Videojuego"],
+                origin: "The Legend of Zelda (Nintendo)",
+                detail: "Reino legendario bendecido por la Trifuerza. Ha sobrevivido a eras de oscuridad gracias al ciclo eterno del héroe de túnica verde y la princesa de la sabiduría.",
+                quote: "Es peligroso ir solo. Toma esto.",
                 icon: "🗡️",
-                lore: "Reino legendario bendecido por la Trifuerza. Ha sobrevivido a eras de oscuridad gracias al ciclo eterno del héroe y la princesa.",
-                points: ["Castillo de Hyrule", "Bosque Perdido", "Montaña de la Muerte"],
-                images: ["https://placehold.co/600x400/15803d/f1f5f9?text=Reino+de+Hyrule"]
+                color: "green",
+                image: "https://placehold.co/600x400/14532d/f1f5f9?text=Hyrule"
             },
             "hogwarts": {
                 title: "Hogwarts",
-                category: "Lugar (Mesa)",
-                fandom: "Harry Potter",
-                color: "purple",
+                tags: ["Libro", "Película"],
+                origin: "Harry Potter (J.K. Rowling)",
+                detail: "Colegio de Magia y Hechicería fundado por los cuatro magos más poderosos de su época. Un castillo vivo donde las escaleras se mueven y los techos reflejan el cielo.",
+                quote: "Las palabras son, en mi no tan humilde opinión, nuestra fuente más inagotable de magia.",
                 icon: "🏰",
-                lore: "Castillo encantado que sirve como colegio de magia y hechicería. Sus escaleras se mueven y sus muros guardan secretos centenarios.",
-                points: ["El Gran Comedor", "Sala de los Menesteres", "Bosque Prohibido"],
-                images: ["https://placehold.co/600x400/581c87/f1f5f9?text=Hogwarts"]
+                color: "purple",
+                image: "https://placehold.co/600x400/4c1d95/f1f5f9?text=Hogwarts"
             },
-            
-            // CRAFTS
             "felix-felicis": {
                 title: "Felix Felicis",
-                category: "Craft / Poción",
-                fandom: "Harry Potter",
-                color: "yellow",
+                tags: ["Libro", "Película"],
+                origin: "Harry Potter y el Misterio del Príncipe",
+                detail: "Poción llamada 'Suerte Líquida'. Otorga al bebedor una racha de éxito total. Es de color oro fundido y extremadamente difícil de preparar.",
+                quote: "Es oro líquido... desastrosa si se prepara mal, pero si se hace bien, te sentirás capaz de cualquier cosa.",
                 icon: "✨",
-                lore: "Llamada 'Suerte Líquida'. Otorga al bebedor un éxito temporal en todo lo que intente. Es extremadamente difícil de preparar.",
-                points: ["Ingredientes: Miel de Bosque", "Polvo de Nácar Comestible", "Esencia de Fortuna"],
-                images: ["https://placehold.co/600x400/a16207/f1f5f9?text=Pocion+Final"]
+                color: "gold",
+                image: "https://placehold.co/600x400/854d0e/f1f5f9?text=Felix+Felicis"
             },
             "minuta-hogwarts": {
                 title: "Carta de Hogwarts",
-                category: "Craft / Objeto",
-                fandom: "Harry Potter",
-                color: "yellow",
+                tags: ["Libro", "Película"],
+                origin: "Harry Potter y la Piedra Filosofal",
+                detail: "La invitación oficial entregada por lechuza que cambia la vida de cualquier joven mago. Escrita en tinta verde sobre pergamino de vitela.",
+                quote: "Tenemos el placer de informarle de que dispone de una plaza en el Colegio Hogwarts de Magia y Hechicería.",
                 icon: "✉️",
-                lore: "La invitación que todo joven mago espera recibir al cumplir los 11 años. Escrita en tinta verde sobre pergamino de vitela.",
-                points: ["Escudo de Hogwarts", "Lacre Rojo", "Lista de Materiales"],
-                images: ["https://placehold.co/600x400/78350f/f1f5f9?text=El+Sobre"]
+                color: "gold",
+                image: "https://placehold.co/600x400/78350f/f1f5f9?text=La+Carta"
             },
-            
-            // CULTURA
             "tanabata": {
-                title: "Festival de Tanabata",
-                category: "Cultura",
-                fandom: "Tradición Japonesa / Anime",
-                color: "blue",
+                title: "Festival Tanabata",
+                tags: ["Anime", "Cultura"],
+                origin: "Tradición Japonesa / Múltiples Animes",
+                detail: "El festival de las estrellas que celebra el encuentro de Orihime y Hikoboshi. Se escriben deseos en tiras de papel (tanzaku) y se cuelgan en bambú.",
+                quote: "Incluso si estamos separados por el río de estrellas, nuestros deseos nos mantendrán unidos.",
                 icon: "🏮",
-                lore: "El festival de las estrellas. Celebra el encuentro anual de Orihime y Hikoboshi, separados por la Vía Láctea.",
-                points: ["Deseos en Tanzaku", "Ramas de Bambú", "7 de Julio"],
-                images: ["https://placehold.co/600x400/1e3a8a/f1f5f9?text=Tanabata"]
+                color: "blue",
+                image: "https://placehold.co/600x400/1e40af/f1f5f9?text=Tanabata"
             },
-            
-            // SIMBOLOS
             "trifuerza": {
                 title: "La Trifuerza",
-                category: "Símbolo",
-                fandom: "The Legend of Zelda",
-                color: "yellow",
+                tags: ["Videojuego"],
+                origin: "The Legend of Zelda",
+                detail: "Reliquia definitiva dejada por las diosas Din, Nayru y Farore. Representa el equilibrio entre Poder, Sabiduría y Valor.",
+                quote: "Aquel que toque la Trifuerza verá sus deseos más profundos reflejados en el mundo.",
                 icon: "📐",
-                lore: "La reliquia definitiva dejada por las diosas. Representa el equilibrio perfecto entre Poder, Sabiduría y Valor.",
-                points: ["Din (Poder)", "Nayru (Sabiduría)", "Farore (Valor)"],
-                images: ["https://placehold.co/600x400/854d0e/f1f5f9?text=La+Reliquia"]
+                color: "gold",
+                image: "https://placehold.co/600x400/713f12/f1f5f9?text=Trifuerza"
             },
             "pokeball": {
                 title: "Poké Ball",
-                category: "Símbolo / Tecnología",
-                fandom: "Pokémon",
-                color: "red",
+                tags: ["Videojuego", "Anime"],
+                origin: "Pokémon (Game Freak)",
+                detail: "Tecnología de miniaturización diseñada para capturar, transportar y entrenar criaturas salvajes. Un icono global de la cultura geek.",
+                quote: "¡Hazte con todos!",
                 icon: "🔴",
-                lore: "Dispositivo esférico diseñado para capturar y transportar criaturas salvajes. Un icono de la cultura de entrenadores.",
-                points: ["Cápsula de Captura", "Botón de Apertura", "Digitalización de Datos"],
-                images: ["https://placehold.co/600x400/991b1b/f1f5f9?text=Captura"]
+                color: "red",
+                image: "https://placehold.co/600x400/991b1b/f1f5f9?text=Pokebola"
             },
             "radiantes": {
                 title: "Signo Radiante",
-                category: "Símbolo / Orden",
-                fandom: "El Archivo de las Tormentas",
-                color: "blue",
+                tags: ["Libro"],
+                origin: "El Archivo de las Tormentas (Cosmere)",
+                detail: "Símbolo de las antiguas órdenes de caballeros que protegían a la humanidad. Representa el vínculo Nahel entre un humano y un spren.",
+                quote: "Los Ideales no son leyes, son una brújula. Nos dicen hacia dónde caminar, no dónde detenernos.",
                 icon: "💠",
-                lore: "El emblema que representa a los Caballeros Radiantes. Simboliza los ideales: 'Vida antes que muerte, fuerza antes que debilidad, viaje antes que destino'.",
-                points: ["Vínculo Nahel", "Armas Esquirladas", "Ideales Inmortales"],
-                images: ["https://placehold.co/600x400/1e3a8a/f1f5f9?text=Juramento"]
+                color: "blue",
+                image: "https://placehold.co/600x400/1d4ed8/f1f5f9?text=Juramento"
             }
         };
 
@@ -181,18 +176,16 @@
                     window.history.pushState(null, null, window.location.pathname);
                 }
             } catch (e) {
-                console.warn("Navegación local activa.");
+                console.warn("Navegación simulada.");
             }
             router(id);
         }
 
         function renderMenu() {
             const grid = document.getElementById('menu-grid');
-            const countLabel = document.getElementById('item-count');
             grid.innerHTML = '';
-            
             const keys = Object.keys(items);
-            countLabel.innerText = `${keys.length} Items`;
+            document.getElementById('item-count').innerText = keys.length;
 
             keys.forEach(id => {
                 const item = items[id];
@@ -201,16 +194,18 @@
                 card.onclick = () => navigateTo(id);
                 card.innerHTML = `
                     <div class="flex items-center space-x-4">
-                        <span class="text-3xl filter drop-shadow-md">${item.icon}</span>
+                        <span class="text-3xl">${item.icon}</span>
                         <div>
-                            <p class="text-[9px] text-slate-500 uppercase tracking-widest font-bold mb-0.5">${item.category}</p>
-                            <h3 class="font-bold text-white text-md leading-tight">${item.title}</h3>
-                            <p class="text-[10px] text-yellow-600/80 uppercase tracking-wider mt-0.5">${item.fandom}</p>
+                            <div class="flex flex-wrap gap-1 mb-1">
+                                ${item.tags.map(t => `<span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">${t}</span>`).join('')}
+                            </div>
+                            <h3 class="font-bold text-white text-md">${item.title}</h3>
+                            <p class="text-[9px] text-yellow-600 uppercase font-medium truncate w-40">${item.origin}</p>
                         </div>
                     </div>
-                    <div class="bg-slate-800/50 p-2 rounded-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    <div class="text-slate-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                     </div>
                 `;
@@ -221,53 +216,39 @@
         function renderDetail(id) {
             const item = items[id];
             const container = document.getElementById('detail-content');
-            
-            if (!item) {
-                navigateTo('');
-                return;
-            }
+            if (!item) { navigateTo(''); return; }
 
             container.innerHTML = `
-                <div class="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <div class="text-center py-6">
-                        <span class="text-8xl mb-6 block drop-shadow-2xl animate-bounce-slow">${item.icon}</span>
-                        <p class="text-${item.color}-500 font-bold uppercase text-[10px] tracking-[0.3em] mb-2">${item.category}</p>
-                        <h2 class="fandom-title text-4xl font-bold text-white tracking-wide">${item.title}</h2>
-                        <p class="text-slate-500 font-medium uppercase text-[11px] tracking-widest mt-2">${item.fandom}</p>
+                <div class="space-y-6 animate-in fade-in duration-500">
+                    <div class="text-center py-4">
+                        <span class="text-7xl mb-4 block drop-shadow-2xl">${item.icon}</span>
+                        <div class="flex justify-center gap-2 mb-3">
+                            ${item.tags.map(t => `<span class="bg-yellow-500/10 text-yellow-500 text-[9px] px-3 py-1 rounded-full border border-yellow-500/20 font-bold uppercase tracking-widest">${t}</span>`).join('')}
+                        </div>
+                        <h2 class="fandom-title text-4xl font-bold text-white tracking-tight">${item.title}</h2>
                     </div>
 
-                    <div class="glass p-6 rounded-3xl relative overflow-hidden">
-                        <div class="absolute -top-4 -right-4 p-8 opacity-5 text-6xl italic font-serif">Lore</div>
-                        <h3 class="text-white font-bold mb-4 flex items-center text-xs uppercase tracking-[0.2em]">
-                            <span class="bg-${item.color}-500/20 p-2 rounded-xl mr-4 text-${item.color}-400">📖</span> 
-                            Trasfondo Histórico
-                        </h3>
-                        <p class="text-slate-300 text-sm italic leading-relaxed z-10 relative border-l-2 border-slate-700 pl-4">${item.lore}</p>
-                    </div>
-
-                    <div class="glass p-6 rounded-3xl border-b-4 border-${item.color}-600">
-                        <h3 class="text-white font-bold mb-5 flex items-center text-xs uppercase tracking-[0.2em]">
-                            <span class="bg-${item.color}-500/20 p-2 rounded-xl mr-4 text-${item.color}-400">🔍</span> 
-                            Detalles Clave
-                        </h3>
-                        <div class="grid grid-cols-1 gap-3">
-                            ${item.points.map(point => `
-                                <div class="flex items-center space-x-3 bg-slate-900/40 p-3 rounded-2xl border border-slate-800/50">
-                                    <div class="w-1.5 h-1.5 rounded-full bg-${item.color}-500"></div>
-                                    <span class="text-slate-300 text-[13px] font-medium">${point}</span>
-                                </div>
-                            `).join('')}
+                    <div class="glass p-6 rounded-3xl space-y-4">
+                        <div>
+                            <h4 class="text-yellow-600 text-[10px] font-bold uppercase tracking-widest mb-1">Origen</h4>
+                            <p class="text-slate-200 font-medium">${item.origin}</p>
+                        </div>
+                        <div class="h-px bg-slate-800 w-full"></div>
+                        <div>
+                            <h4 class="text-yellow-600 text-[10px] font-bold uppercase tracking-widest mb-1">Detalle</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">${item.detail}</p>
                         </div>
                     </div>
 
-                    <div class="rounded-3xl overflow-hidden glass p-2 shadow-2xl">
-                        <img src="${item.images[0]}" class="w-full h-auto rounded-2xl object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700" 
+                    <div class="glass p-6 rounded-3xl relative overflow-hidden italic border-l-4 border-yellow-500">
+                        <svg class="absolute -top-2 -left-2 h-12 w-12 text-white opacity-5" fill="currentColor" viewBox="0 0 32 32"><path d="M10 8v8H6v2a2 2 0 002 2h2v4H8a6 6 0 01-6-6v-8a2 2 0 012-2h4zm12 0v8h-4v2a2 2 0 002 2h2v4h-2a6 6 0 01-6-6v-8a2 2 0 012-2h4z"/></svg>
+                        <p class="text-slate-400 text-sm leading-relaxed relative z-10">${item.quote}</p>
+                    </div>
+
+                    <div class="rounded-3xl overflow-hidden glass p-2">
+                        <img src="${item.image}" class="w-full h-auto rounded-2xl grayscale-[0.3] hover:grayscale-0 transition-all duration-500" 
                              onerror="this.src='https://placehold.co/600x400/1e293b/94a3b8?text=${item.title}'">
                     </div>
-                    
-                    <footer class="text-center py-10 opacity-30">
-                        <p class="text-[9px] uppercase tracking-widest">Fin del Registro • Gremio de Alquimia</p>
-                    </footer>
                 </div>
             `;
         }
@@ -300,13 +281,5 @@
         window.addEventListener('popstate', () => router());
         window.onload = () => router();
     </script>
-
-    <style>
-        @keyframes bounce-slow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .animate-bounce-slow { animation: bounce-slow 4s ease-in-out infinite; }
-    </style>
 </body>
 </html>
