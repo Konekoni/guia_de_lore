@@ -1,474 +1,265 @@
 <!DOCTYPE html>
-<html lang="es"><head>
+<html lang="es">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archivo de Lore - Guía de Referencias</title>
+    <title>Archivo de Lore - Boda</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&amp;family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f1f5f9; }
+        body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f1f5f9; }
         .fandom-title { font-family: 'Cinzel', serif; }
-        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
         .transition-page { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .hidden-section { display: none; opacity: 0; transform: translateY(10px); }
         
-        /* Efectos de brillo por categorías */
-        .glow-gold { box-shadow: 0 0 20px rgba(234, 179, 8, 0.1); border-left: 4px solid #eab308; }
-        .glow-blue { box-shadow: 0 0 20px rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; }
-        .glow-green { box-shadow: 0 0 20px rgba(34, 197, 94, 0.1); border-left: 4px solid #22c55e; }
-        .glow-purple { box-shadow: 0 0 20px rgba(168, 85, 247, 0.1); border-left: 4px solid #a855f7; }
+        .tag-libro { background: #1e3a8a; color: #dbeafe; } 
+        .tag-pelicula { background: #7f1d1d; color: #fee2e2; } 
+        .tag-videojuego { background: #14532d; color: #dcfce7; } 
+        .tag-anime { background: #581c87; color: #f3e8ff; } 
+        .tag-cultura { background: #713f12; color: #fef9c3; } 
+        .tag-simbolo { background: #7c2d12; color: #ffedd5; }
         
-        .card-hover:hover { transform: scale(1.02); background: rgba(51, 65, 85, 0.8); }
-        
-        blockquote { border-left: 4px solid #64748b; padding-left: 1rem; font-style: italic; color: #94a3b8; }
+        .location-badge { background: #eab308; color: #422006; font-weight: 800; }
+        .card-hover:hover { transform: translateY(-4px); border-color: rgba(234, 179, 8, 0.5); box-shadow: 0 10px 20px -10px rgba(234, 179, 8, 0.3); }
+        blockquote { border-left: 3px solid #eab308; padding-left: 1rem; font-style: italic; color: #94a3b8; }
     </style>
-<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.absolute{position:absolute}.relative{position:relative}.-left-2{left:-0.5rem}.-top-2{top:-0.5rem}.z-10{z-index:10}.mx-auto{margin-left:auto;margin-right:auto}.mb-8{margin-bottom:2rem}.mr-3{margin-right:0.75rem}.mt-3{margin-top:0.75rem}.mt-6{margin-top:1.5rem}.mb-1{margin-bottom:0.25rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.block{display:block}.flex{display:flex}.grid{display:grid}.h-0\.5{height:0.125rem}.h-4{height:1rem}.h-12{height:3rem}.h-auto{height:auto}.h-px{height:1px}.min-h-screen{min-height:100vh}.w-16{width:4rem}.w-4{width:1rem}.w-40{width:10rem}.w-12{width:3rem}.w-full{width:100%}.max-w-md{max-width:28rem}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-4{gap:1rem}.gap-1{gap:0.25rem}.gap-2{gap:0.5rem}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded-full{border-radius:9999px}.rounded-md{border-radius:0.375rem}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-l-4{border-left-width:4px}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.border-yellow-500{--tw-border-opacity:1;border-color:rgb(234 179 8 / var(--tw-border-opacity, 1))}.border-yellow-500\/20{border-color:rgb(234 179 8 / 0.2)}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-900\/50{background-color:rgb(15 23 42 / 0.5)}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(2 6 23 / var(--tw-bg-opacity, 1))}.bg-yellow-500\/10{background-color:rgb(234 179 8 / 0.1)}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-transparent{--tw-gradient-from:transparent var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-yellow-600{--tw-gradient-to:rgb(202 138 4 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #ca8a04 var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-2{padding:0.5rem}.p-6{padding:1.5rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-12{padding-top:3rem;padding-bottom:3rem}.px-1\.5{padding-left:0.375rem;padding-right:0.375rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-20{padding-bottom:5rem}.pb-4{padding-bottom:1rem}.pr-4{padding-right:1rem}.text-center{text-align:center}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-\[10px\]{font-size:10px}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-\[8px\]{font-size:8px}.text-\[9px\]{font-size:9px}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-7xl{font-size:4.5rem;line-height:1}.font-bold{font-weight:700}.font-medium{font-weight:500}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-relaxed{line-height:1.625}.tracking-\[0\.2em\]{letter-spacing:0.2em}.tracking-\[0\.3em\]{letter-spacing:0.3em}.tracking-widest{letter-spacing:0.1em}.tracking-tighter{letter-spacing:-0.05em}.tracking-tight{letter-spacing:-0.025em}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-yellow-500{--tw-text-opacity:1;color:rgb(234 179 8 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-yellow-600{--tw-text-opacity:1;color:rgb(202 138 4 / var(--tw-text-opacity, 1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.opacity-50{opacity:0.5}.opacity-5{opacity:0.05}.drop-shadow-md{--tw-drop-shadow:drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.drop-shadow-2xl{--tw-drop-shadow:drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.grayscale-\[0\.3\]{--tw-grayscale:grayscale(0.3);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-500{transition-duration:500ms}.selection\:bg-yellow-500\/30 *::selection{background-color:rgb(234 179 8 / 0.3)}.selection\:bg-yellow-500\/30::selection{background-color:rgb(234 179 8 / 0.3)}.hover\:text-yellow-500:hover{--tw-text-opacity:1;color:rgb(234 179 8 / var(--tw-text-opacity, 1))}.hover\:grayscale-0:hover{--tw-grayscale:grayscale(0);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.group:hover .group-hover\:bg-yellow-500{--tw-bg-opacity:1;background-color:rgb(234 179 8 / var(--tw-bg-opacity, 1))}.group:hover .group-hover\:text-slate-950{--tw-text-opacity:1;color:rgb(2 6 23 / var(--tw-text-opacity, 1))}@media (min-width: 768px){.md\:p-6{padding:1.5rem}}</style><style>
-                    *:hover { outline: 1px dashed #6366f1 !important; cursor: text !important; }
-                    [contenteditable="true"]:focus { outline: 2px solid #6366f1 !important; }
-                </style></head>
-<body class="min-h-screen bg-slate-950 selection:bg-yellow-500/30">
+</head>
+<body class="min-h-screen bg-slate-950 selection:bg-yellow-500/30 pb-10">
 
-    <div id="app" class="max-w-md mx-auto p-4 md:p-6 pb-20">
-        
-        <header class="text-center py-12">
-            <h1 class="fandom-title text-3xl font-bold tracking-[0.2em] text-yellow-500 drop-shadow-md">ARCHIVO DE LORE</h1>
-            <p class="text-slate-500 text-[10px] uppercase tracking-[0.3em] mt-3">Guía para que no se te escape ni una referencia</p>
-            <div class="h-0.5 w-16 bg-gradient-to-r from-transparent via-yellow-600 to-transparent mx-auto mt-6 opacity-50"></div>
+    <div id="app" class="max-w-md mx-auto p-4 md:p-6">
+        <header class="text-center py-8">
+            <h1 onclick="navigateTo('')" class="fandom-title text-3xl font-bold tracking-[0.15em] text-yellow-500 drop-shadow-md cursor-pointer">ARCHIVO DE LORE</h1>
+            <p class="text-slate-500 text-[10px] uppercase tracking-[0.2em] mt-2">Guía para que no se te escape ni una referencia</p>
+            <div class="h-px w-24 bg-gradient-to-r from-transparent via-slate-700 to-transparent mx-auto mt-6"></div>
         </header>
 
-        <!-- VISTA MENÚ -->
-        <section id="view-menu" class="transition-page space-y-6 hidden-section" style="display: none;">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                <h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest">Registros Detectados</h2>
-                <span class="bg-slate-800 text-yellow-500 text-[10px] px-2 py-1 rounded-md font-bold" id="item-count">10</span>
-            </div>
-            
-            <div id="menu-grid" class="grid grid-cols-1 gap-4"><div class="glass p-4 rounded-2xl flex items-center justify-between cursor-pointer card-hover glow-green transition-all">
-                    <div class="flex items-center space-x-4">
-                        <span class="text-3xl">🌿</span>
-                        <div>
-                            <div class="flex flex-wrap gap-1 mb-1">
-                                <span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Libro</span><span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Película</span>
-                            </div>
-                            <h3 class="font-bold text-white text-md">The Shire</h3>
-                            <p class="text-[9px] text-yellow-600 uppercase font-medium truncate w-40">El Señor de los Anillos / El Hobbit (J.R.R. Tolkien)</p>
-                        </div>
-                    </div>
-                    <div class="text-slate-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </div>
-                </div><div class="glass p-4 rounded-2xl flex items-center justify-between cursor-pointer card-hover glow-blue transition-all">
-                    <div class="flex items-center space-x-4">
-                        <span class="text-3xl">🌪️</span>
-                        <div>
-                            <div class="flex flex-wrap gap-1 mb-1">
-                                <span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Libro</span>
-                            </div>
-                            <h3 class="font-bold text-white text-md">Roshar</h3>
-                            <p class="text-[9px] text-yellow-600 uppercase font-medium truncate w-40">El Archivo de las Tormentas (Brandon Sanderson)</p>
-                        </div>
-                    </div>
-                    <div class="text-slate-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </div>
-                </div><div class="glass p-4 rounded-2xl flex items-center justify-between cursor-pointer card-hover glow-green transition-all">
-                    <div class="flex items-center space-x-4">
-                        <span class="text-3xl">🗡️</span>
-                        <div>
-                            <div class="flex flex-wrap gap-1 mb-1">
-                                <span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Videojuego</span>
-                            </div>
-                            <h3 class="font-bold text-white text-md">Hyrule</h3>
-                            <p class="text-[9px] text-yellow-600 uppercase font-medium truncate w-40">The Legend of Zelda (Nintendo)</p>
-                        </div>
-                    </div>
-                    <div class="text-slate-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </div>
-                </div><div class="glass p-4 rounded-2xl flex items-center justify-between cursor-pointer card-hover glow-purple transition-all">
-                    <div class="flex items-center space-x-4">
-                        <span class="text-3xl">🏰</span>
-                        <div>
-                            <div class="flex flex-wrap gap-1 mb-1">
-                                <span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Libro</span><span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Película</span>
-                            </div>
-                            <h3 class="font-bold text-white text-md">Hogwarts</h3>
-                            <p class="text-[9px] text-yellow-600 uppercase font-medium truncate w-40">Harry Potter (J.K. Rowling)</p>
-                        </div>
-                    </div>
-                    <div class="text-slate-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </div>
-                </div><div class="glass p-4 rounded-2xl flex items-center justify-between cursor-pointer card-hover glow-gold transition-all">
-                    <div class="flex items-center space-x-4">
-                        <span class="text-3xl">✨</span>
-                        <div>
-                            <div class="flex flex-wrap gap-1 mb-1">
-                                <span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Libro</span><span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Película</span>
-                            </div>
-                            <h3 class="font-bold text-white text-md">Felix Felicis</h3>
-                            <p class="text-[9px] text-yellow-600 uppercase font-medium truncate w-40">Harry Potter y el Misterio del Príncipe</p>
-                        </div>
-                    </div>
-                    <div class="text-slate-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </div>
-                </div><div class="glass p-4 rounded-2xl flex items-center justify-between cursor-pointer card-hover glow-gold transition-all">
-                    <div class="flex items-center space-x-4">
-                        <span class="text-3xl">✉️</span>
-                        <div>
-                            <div class="flex flex-wrap gap-1 mb-1">
-                                <span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Libro</span><span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Película</span>
-                            </div>
-                            <h3 class="font-bold text-white text-md">Carta de Hogwarts</h3>
-                            <p class="text-[9px] text-yellow-600 uppercase font-medium truncate w-40">Harry Potter y la Piedra Filosofal</p>
-                        </div>
-                    </div>
-                    <div class="text-slate-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </div>
-                </div><div class="glass p-4 rounded-2xl flex items-center justify-between cursor-pointer card-hover glow-blue transition-all">
-                    <div class="flex items-center space-x-4">
-                        <span class="text-3xl">🏮</span>
-                        <div>
-                            <div class="flex flex-wrap gap-1 mb-1">
-                                <span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Anime</span><span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Cultura</span>
-                            </div>
-                            <h3 class="font-bold text-white text-md">Festival Tanabata</h3>
-                            <p class="text-[9px] text-yellow-600 uppercase font-medium truncate w-40">Tradición Japonesa / Múltiples Animes</p>
-                        </div>
-                    </div>
-                    <div class="text-slate-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </div>
-                </div><div class="glass p-4 rounded-2xl flex items-center justify-between cursor-pointer card-hover glow-gold transition-all">
-                    <div class="flex items-center space-x-4">
-                        <span class="text-3xl">📐</span>
-                        <div>
-                            <div class="flex flex-wrap gap-1 mb-1">
-                                <span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Videojuego</span>
-                            </div>
-                            <h3 class="font-bold text-white text-md">La Trifuerza</h3>
-                            <p class="text-[9px] text-yellow-600 uppercase font-medium truncate w-40">The Legend of Zelda</p>
-                        </div>
-                    </div>
-                    <div class="text-slate-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </div>
-                </div><div class="glass p-4 rounded-2xl flex items-center justify-between cursor-pointer card-hover glow-red transition-all">
-                    <div class="flex items-center space-x-4">
-                        <span class="text-3xl">🔴</span>
-                        <div>
-                            <div class="flex flex-wrap gap-1 mb-1">
-                                <span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Videojuego</span><span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Anime</span>
-                            </div>
-                            <h3 class="font-bold text-white text-md">Poké Ball</h3>
-                            <p class="text-[9px] text-yellow-600 uppercase font-medium truncate w-40">Pokémon (Game Freak)</p>
-                        </div>
-                    </div>
-                    <div class="text-slate-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </div>
-                </div><div class="glass p-4 rounded-2xl flex items-center justify-between cursor-pointer card-hover glow-blue transition-all">
-                    <div class="flex items-center space-x-4">
-                        <span class="text-3xl">💠</span>
-                        <div>
-                            <div class="flex flex-wrap gap-1 mb-1">
-                                <span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">Libro</span>
-                            </div>
-                            <h3 class="font-bold text-white text-md">Signo Radiante</h3>
-                            <p class="text-[9px] text-yellow-600 uppercase font-medium truncate w-40">El Archivo de las Tormentas (Cosmere)</p>
-                        </div>
-                    </div>
-                    <div class="text-slate-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </div>
-                </div></div>
+        <!-- VISTA 1: MENÚ DE ORÍGENES -->
+        <section id="view-origins" class="transition-page space-y-4">
+            <h2 class="text-slate-400 text-[11px] uppercase tracking-widest font-bold mb-4 text-center">Explora por Universos</h2>
+            <div id="origins-grid" class="grid grid-cols-1 gap-4"></div>
         </section>
 
-        <!-- VISTA DETALLE -->
-        <section id="view-detail" class="transition-page" style="display: block;">
-            <button onclick="navigateTo('')" class="mb-8 flex items-center text-slate-400 hover:text-yellow-500 transition-all group bg-slate-900/50 pr-4 rounded-full border border-slate-800">
-                <div class="bg-slate-800 p-3 rounded-full mr-3 group-hover:bg-yellow-500 group-hover:text-slate-950 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"></path>
-                    </svg>
-                </div>
-                <span class="text-[10px] uppercase font-bold tracking-widest">Volver al Archivo</span>
+        <!-- VISTA 2: LISTA DE ITEMS POR ORIGEN -->
+        <section id="view-items" class="hidden-section transition-page">
+            <button onclick="navigateTo('')" class="mb-6 flex items-center text-slate-400 hover:text-yellow-500 transition-all bg-slate-900/80 pl-2 pr-4 py-2 rounded-full border border-slate-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                <span class="text-[10px] uppercase font-bold tracking-widest">Volver a Orígenes</span>
             </button>
-
-            <div id="detail-content">
-                <div class="space-y-6 animate-in fade-in duration-500">
-                    <div class="text-center py-4">
-                        <span class="text-7xl mb-4 block drop-shadow-2xl">🌿</span>
-                        <div class="flex justify-center gap-2 mb-3">
-                            <span class="bg-yellow-500/10 text-yellow-500 text-[9px] px-3 py-1 rounded-full border border-yellow-500/20 font-bold uppercase tracking-widest">Libro</span><span class="bg-yellow-500/10 text-yellow-500 text-[9px] px-3 py-1 rounded-full border border-yellow-500/20 font-bold uppercase tracking-widest">Película</span>
-                        </div>
-                        <h2 class="fandom-title text-4xl font-bold text-white tracking-tight">The Shire</h2>
-                    </div>
-
-                    <div class="glass p-6 rounded-3xl space-y-4">
-                        <div>
-                            <h4 class="text-yellow-600 text-[10px] font-bold uppercase tracking-widest mb-1">Origen</h4>
-                            <p class="text-slate-200 font-medium">El Señor de los Anillos / El Hobbit (J.R.R. Tolkien)</p>
-                        </div>
-                        <div class="h-px bg-slate-800 w-full"></div>
-                        <div>
-                            <h4 class="text-yellow-600 text-[10px] font-bold uppercase tracking-widest mb-1">Detalle</h4>
-                            <p class="text-slate-300 text-sm leading-relaxed">En el mundo del señor de los anillos, en la tierra media se encuentra La Comarca (The Shire) una tierra fertil donde viven los hobbits.<br>En este lugar es donde comienzan las historias de ambos libros.</p>
-                        </div>
-                    </div>
-
-                    <div class="glass p-6 rounded-3xl relative overflow-hidden italic border-l-4 border-yellow-500">
-                        <svg class="absolute -top-2 -left-2 h-12 w-12 text-white opacity-5" fill="currentColor" viewBox="0 0 32 32"><path d="M10 8v8H6v2a2 2 0 002 2h2v4H8a6 6 0 01-6-6v-8a2 2 0 012-2h4zm12 0v8h-4v2a2 2 0 002 2h2v4h-2a6 6 0 01-6-6v-8a2 2 0 012-2h4z"></path></svg>
-                        <p class="text-slate-400 text-sm leading-relaxed relative z-10">En un agujero en el suelo, vivía un hobbit. No un agujero húmedo, sucio y repugnante... era un agujero-hobbit, y eso significa comodidad.</p>
-                    </div>
-
-                    <div class="rounded-3xl overflow-hidden glass p-2">
-                        <img src="https://placehold.co/600x400/064e3b/f1f5f9?text=La+Comarca" class="w-full h-auto rounded-2xl grayscale-[0.3] hover:grayscale-0 transition-all duration-500" onerror="this.src='https://placehold.co/600x400/1e293b/94a3b8?text=The Shire'">
-                    </div>
-                </div>
-            </div>
+            <div id="origin-info-header" class="mb-8"></div>
+            <div id="items-grid" class="space-y-3"></div>
         </section>
 
+        <!-- VISTA 3: DETALLE DE ITEM -->
+        <section id="view-detail" class="hidden-section transition-page">
+            <button id="back-to-list" class="mb-6 flex items-center text-slate-400 hover:text-yellow-500 transition-all bg-slate-900/80 pl-2 pr-4 py-2 rounded-full border border-slate-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                <span id="back-text" class="text-[10px] uppercase font-bold tracking-widest">Volver</span>
+            </button>
+            <div id="detail-content"></div>
+        </section>
     </div>
 
     <script>
+        const origins = {
+          "lotr": {
+                    "name": "El Señor de los Anillos",
+                    "emoji": "🌋",
+                    "summary": "La obra épica de Tolkien sobre la Tierra Media.",
+                    "tags": [
+                              "Libro",
+                              "Película"
+                    ]
+          },
+          "stormlight": {
+                    "name": "El Archivo de las Tormentas",
+                    "emoji": "⛈️",
+                    "summary": "Fantasía épica de Brandon Sanderson en el mundo de Roshar.",
+                    "tags": [
+                              "Libro"
+                    ]
+          },
+          "zelda": {
+                    "name": "The Legend of Zelda",
+                    "emoji": "🗡️",
+                    "summary": "La saga de Nintendo sobre el reino de Hyrule.",
+                    "tags": [
+                              "Videojuego"
+                    ]
+          },
+          "hp": {
+                    "name": "Harry Potter",
+                    "emoji": "⚡",
+                    "summary": "El mundo mágico creado por J.K. Rowling.",
+                    "tags": [
+                              "Libro",
+                              "Película"
+                    ]
+          }
+};
+
         const items = {
-            "the-shire": {
-                title: "The Shire",
-                tags: ["Libro", "Película"],
-                origin: "El Señor de los Anillos / El Hobbit (J.R.R. Tolkien)",
-                detail: "Tierra fértil de colinas verdes y paz absoluta. El hogar de los Hobbits es famoso por su agricultura, su cerveza y sus banquetes. Es un lugar que representa la inocencia frente a la oscuridad del mundo.",
-                quote: "En un agujero en el suelo, vivía un hobbit. No un agujero húmedo, sucio y repugnante... era un agujero-hobbit, y eso significa comodidad.",
-                icon: "🌿",
-                color: "green",
-                image: "https://placehold.co/600x400/064e3b/f1f5f9?text=La+Comarca"
-            },
-            "roshar": {
-                title: "Roshar",
-                tags: ["Libro"],
-                origin: "El Archivo de las Tormentas (Brandon Sanderson)",
-                detail: "Un mundo de roca azotado por las Altas Tormentas. Aquí, la flora se retrae al tacto y la fauna se protege con caparazones. La Luz de Tormenta es la energía que alimenta el mundo y los poderes de los Caballeros Radiantes.",
-                quote: "Vida antes que muerte. Fuerza antes que debilidad. Viaje antes que destino.",
-                icon: "🌪️",
-                color: "blue",
-                image: "https://placehold.co/600x400/1e3a8a/f1f5f9?text=Roshar"
-            },
-            "hyrule": {
-                title: "Hyrule",
-                tags: ["Videojuego"],
-                origin: "The Legend of Zelda (Nintendo)",
-                detail: "Reino legendario bendecido por la Trifuerza. Ha sobrevivido a eras de oscuridad gracias al ciclo eterno del héroe de túnica verde y la princesa de la sabiduría.",
-                quote: "Es peligroso ir solo. Toma esto.",
-                icon: "🗡️",
-                color: "green",
-                image: "https://placehold.co/600x400/14532d/f1f5f9?text=Hyrule"
-            },
-            "hogwarts": {
-                title: "Hogwarts",
-                tags: ["Libro", "Película"],
-                origin: "Harry Potter (J.K. Rowling)",
-                detail: "Colegio de Magia y Hechicería fundado por los cuatro magos más poderosos de su época. Un castillo vivo donde las escaleras se mueven y los techos reflejan el cielo.",
-                quote: "Las palabras son, en mi no tan humilde opinión, nuestra fuente más inagotable de magia.",
-                icon: "🏰",
-                color: "purple",
-                image: "https://placehold.co/600x400/4c1d95/f1f5f9?text=Hogwarts"
-            },
-            "felix-felicis": {
-                title: "Felix Felicis",
-                tags: ["Libro", "Película"],
-                origin: "Harry Potter y el Misterio del Príncipe",
-                detail: "Poción llamada 'Suerte Líquida'. Otorga al bebedor una racha de éxito total. Es de color oro fundido y extremadamente difícil de preparar.",
-                quote: "Es oro líquido... desastrosa si se prepara mal, pero si se hace bien, te sentirás capaz de cualquier cosa.",
-                icon: "✨",
-                color: "gold",
-                image: "https://placehold.co/600x400/854d0e/f1f5f9?text=Felix+Felicis"
-            },
-            "minuta-hogwarts": {
-                title: "Carta de Hogwarts",
-                tags: ["Libro", "Película"],
-                origin: "Harry Potter y la Piedra Filosofal",
-                detail: "La invitación oficial entregada por lechuza que cambia la vida de cualquier joven mago. Escrita en tinta verde sobre pergamino de vitela.",
-                quote: "Tenemos el placer de informarle de que dispone de una plaza en el Colegio Hogwarts de Magia y Hechicería.",
-                icon: "✉️",
-                color: "gold",
-                image: "https://placehold.co/600x400/78350f/f1f5f9?text=La+Carta"
-            },
-            "tanabata": {
-                title: "Festival Tanabata",
-                tags: ["Anime", "Cultura"],
-                origin: "Tradición Japonesa / Múltiples Animes",
-                detail: "El festival de las estrellas que celebra el encuentro de Orihime y Hikoboshi. Se escriben deseos en tiras de papel (tanzaku) y se cuelgan en bambú.",
-                quote: "Incluso si estamos separados por el río de estrellas, nuestros deseos nos mantendrán unidos.",
-                icon: "🏮",
-                color: "blue",
-                image: "https://placehold.co/600x400/1e40af/f1f5f9?text=Tanabata"
-            },
-            "trifuerza": {
-                title: "La Trifuerza",
-                tags: ["Videojuego"],
-                origin: "The Legend of Zelda",
-                detail: "Reliquia definitiva dejada por las diosas Din, Nayru y Farore. Representa el equilibrio entre Poder, Sabiduría y Valor.",
-                quote: "Aquel que toque la Trifuerza verá sus deseos más profundos reflejados en el mundo.",
-                icon: "📐",
-                color: "gold",
-                image: "https://placehold.co/600x400/713f12/f1f5f9?text=Trifuerza"
-            },
-            "pokeball": {
-                title: "Poké Ball",
-                tags: ["Videojuego", "Anime"],
-                origin: "Pokémon (Game Freak)",
-                detail: "Tecnología de miniaturización diseñada para capturar, transportar y entrenar criaturas salvajes. Un icono global de la cultura geek.",
-                quote: "¡Hazte con todos!",
-                icon: "🔴",
-                color: "red",
-                image: "https://placehold.co/600x400/991b1b/f1f5f9?text=Pokebola"
-            },
-            "radiantes": {
-                title: "Signo Radiante",
-                tags: ["Libro"],
-                origin: "El Archivo de las Tormentas (Cosmere)",
-                detail: "Símbolo de las antiguas órdenes de caballeros que protegían a la humanidad. Representa el vínculo Nahel entre un humano y un spren.",
-                quote: "Los Ideales no son leyes, son una brújula. Nos dicen hacia dónde caminar, no dónde detenernos.",
-                icon: "💠",
-                color: "blue",
-                image: "https://placehold.co/600x400/1d4ed8/f1f5f9?text=Juramento"
-            }
-        };
+          "the-shire": {
+                    "originId": "lotr",
+                    "title": "The Shire",
+                    "emoji": "🌿",
+                    "detail": "Hogar de los Hobbits, un lugar de paz y colinas verdes.",
+                    "quote": "En un agujero en el suelo, vivía un hobbit.",
+                    "location": "Nombre de Mesa",
+                    "comments": [
+                              {
+                                        "by": "Novio",
+                                        "text": "Nuestro lugar soñado."
+                              }
+                    ]
+          },
+          "felix-felicis": {
+                    "originId": "hp",
+                    "title": "Felix Felicis",
+                    "emoji": "✨",
+                    "detail": "Poción de suerte líquida que garantiza el éxito en todo.",
+                    "quote": "Te sentirás capaz de cualquier cosa.",
+                    "location": "Regalito de invitados",
+                    "comments": [
+                              {
+                                        "by": "Novia",
+                                        "text": "Un detalle mágico para todos."
+                              }
+                    ]
+          },
+          "roshar": {
+                    "originId": "stormlight",
+                    "title": "Roshar",
+                    "emoji": "🦀",
+                    "detail": "Mundo azotado por tormentas y caballeros radiantes.",
+                    "quote": "Viaje antes que destino.",
+                    "location": "Nombre de Mesa",
+                    "comments": [
+                              {
+                                        "by": "Novio",
+                                        "text": "La mejor construcción de mundo."
+                              }
+                    ]
+          }
+};
 
         function navigateTo(id) {
+            // Intentar actualizar el hash para que el QR funcione, pero capturar error si el entorno lo bloquea
             try {
-                if (id) {
-                    window.history.pushState(null, null, '#' + id);
-                } else {
-                    window.history.pushState(null, null, window.location.pathname);
-                }
+                window.location.hash = id;
             } catch (e) {
-                console.warn("Navegación simulada.");
+                console.warn("Navegación por URL bloqueada, usando navegación interna.");
             }
-            router(id);
+            router(id); // Ejecutar la lógica de cambio de vista manualmente
         }
 
-        function renderMenu() {
-            const grid = document.getElementById('menu-grid');
-            grid.innerHTML = '';
-            const keys = Object.keys(items);
-            document.getElementById('item-count').innerText = keys.length;
+        function getTagClass(tag) {
+            const t = tag.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            return `tag-${t}`;
+        }
 
-            keys.forEach(id => {
-                const item = items[id];
+        function renderOrigins() {
+            const grid = document.getElementById('origins-grid');
+            grid.innerHTML = '';
+            Object.keys(origins).forEach(id => {
+                const origin = origins[id];
                 const card = document.createElement('div');
-                card.className = `glass p-4 rounded-2xl flex items-center justify-between cursor-pointer card-hover glow-${item.color} transition-all`;
-                card.onclick = () => navigateTo(id);
+                card.className = `glass p-6 rounded-3xl cursor-pointer card-hover border border-slate-800 flex items-center gap-4`;
+                card.onclick = () => navigateTo(`origin-${id}`);
                 card.innerHTML = `
-                    <div class="flex items-center space-x-4">
-                        <span class="text-3xl">${item.icon}</span>
-                        <div>
-                            <div class="flex flex-wrap gap-1 mb-1">
-                                ${item.tags.map(t => `<span class="text-[8px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-tighter">${t}</span>`).join('')}
-                            </div>
-                            <h3 class="font-bold text-white text-md">${item.title}</h3>
-                            <p class="text-[9px] text-yellow-600 uppercase font-medium truncate w-40">${item.origin}</p>
+                    <div class="text-4xl">${origin.emoji}</div>
+                    <div class="flex-1">
+                        <h3 class="fandom-title text-lg font-bold text-yellow-500">${origin.name}</h3>
+                        <div class="flex gap-1 mt-1">
+                            ${origin.tags.map(t => `<span class="text-[7px] px-1.5 py-0.5 rounded uppercase font-bold ${getTagClass(t)}">${t}</span>`).join('')}
                         </div>
-                    </div>
-                    <div class="text-slate-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        function renderDetail(id) {
-            const item = items[id];
-            const container = document.getElementById('detail-content');
-            if (!item) { navigateTo(''); return; }
-
-            container.innerHTML = `
-                <div class="space-y-6 animate-in fade-in duration-500">
-                    <div class="text-center py-4">
-                        <span class="text-7xl mb-4 block drop-shadow-2xl">${item.icon}</span>
-                        <div class="flex justify-center gap-2 mb-3">
-                            ${item.tags.map(t => `<span class="bg-yellow-500/10 text-yellow-500 text-[9px] px-3 py-1 rounded-full border border-yellow-500/20 font-bold uppercase tracking-widest">${t}</span>`).join('')}
-                        </div>
-                        <h2 class="fandom-title text-4xl font-bold text-white tracking-tight">${item.title}</h2>
-                    </div>
-
-                    <div class="glass p-6 rounded-3xl space-y-4">
-                        <div>
-                            <h4 class="text-yellow-600 text-[10px] font-bold uppercase tracking-widest mb-1">Origen</h4>
-                            <p class="text-slate-200 font-medium">${item.origin}</p>
-                        </div>
-                        <div class="h-px bg-slate-800 w-full"></div>
-                        <div>
-                            <h4 class="text-yellow-600 text-[10px] font-bold uppercase tracking-widest mb-1">Detalle</h4>
-                            <p class="text-slate-300 text-sm leading-relaxed">${item.detail}</p>
-                        </div>
-                    </div>
-
-                    <div class="glass p-6 rounded-3xl relative overflow-hidden italic border-l-4 border-yellow-500">
-                        <svg class="absolute -top-2 -left-2 h-12 w-12 text-white opacity-5" fill="currentColor" viewBox="0 0 32 32"><path d="M10 8v8H6v2a2 2 0 002 2h2v4H8a6 6 0 01-6-6v-8a2 2 0 012-2h4zm12 0v8h-4v2a2 2 0 002 2h2v4h-2a6 6 0 01-6-6v-8a2 2 0 012-2h4z"/></svg>
-                        <p class="text-slate-400 text-sm leading-relaxed relative z-10">${item.quote}</p>
-                    </div>
-
-                    <div class="rounded-3xl overflow-hidden glass p-2">
-                        <img src="${item.image}" class="w-full h-auto rounded-2xl grayscale-[0.3] hover:grayscale-0 transition-all duration-500" 
-                             onerror="this.src='https://placehold.co/600x400/1e293b/94a3b8?text=${item.title}'">
-                    </div>
-                </div>
-            `;
+        function renderItemsInOrigin(originId) {
+            const origin = origins[originId];
+            const header = document.getElementById('origin-info-header');
+            const grid = document.getElementById('items-grid');
+            header.innerHTML = `<div class="text-center glass p-6 rounded-3xl border-b-2 border-yellow-500/50"><div class="text-5xl mb-3">${origin.emoji}</div><h2 class="fandom-title text-2xl font-bold text-yellow-500 mb-2">${origin.name}</h2></div>`;
+            grid.innerHTML = '';
+            Object.keys(items).filter(k => items[k].originId === originId).forEach(itemId => {
+                const item = items[itemId];
+                const div = document.createElement('div');
+                div.className = `glass p-4 rounded-2xl flex items-center justify-between cursor-pointer card-hover border border-slate-800`;
+                div.onclick = () => navigateTo(itemId);
+                div.innerHTML = `<div><h4 class="font-bold text-white uppercase text-sm">${item.title}</h4><p class="text-yellow-500/70 text-[9px] font-bold uppercase">📍 ${item.location}</p></div><span class="text-xl">${item.emoji}</span>`;
+                grid.appendChild(div);
+            });
         }
 
-        function router(providedId) {
-            const hash = providedId !== undefined ? providedId : location.hash.replace('#', '');
-            const menuView = document.getElementById('view-menu');
-            const detailView = document.getElementById('view-detail');
+        function renderDetail(itemId) {
+            const item = items[itemId];
+            const origin = origins[item.originId];
+            const container = document.getElementById('detail-content');
+            document.getElementById('back-to-list').onclick = () => navigateTo(`origin-${item.originId}`);
+            document.getElementById('back-text').innerText = `Volver a ${origin.name}`;
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <div class="text-center"><div class="text-6xl mb-4">${item.emoji}</div><h2 class="fandom-title text-3xl font-bold text-yellow-500">${item.title}</h2><div class="location-badge inline-block px-4 py-1 rounded-full text-[10px] uppercase mt-4">En: ${item.location}</div></div>
+                    <div class="glass p-5 rounded-3xl border-l-4 border-slate-700"><h4 class="text-slate-500 text-[10px] font-bold uppercase mb-1">Origen</h4><div class="font-bold text-white text-base">${origin.name}</div><p class="text-slate-400 text-xs italic">${origin.summary}</p></div>
+                    <div class="glass p-5 rounded-3xl border border-slate-800"><h4 class="text-yellow-600 text-[10px] font-bold uppercase mb-2">Detalle</h4><p class="text-slate-200 text-sm">${item.detail}</p></div>
+                    <blockquote class="my-6"><p class="text-slate-400 text-sm italic">"${item.quote}"</p></blockquote>
+                    <div class="glass p-5 rounded-3xl border-t border-slate-800 space-y-4">
+                        <h4 class="text-slate-500 text-[10px] font-bold uppercase">Opinión</h4>
+                        ${item.comments.map(c => `<div class="border-l-2 border-slate-800 pl-3"><span class="text-[9px] px-2 py-0.5 rounded font-bold uppercase bg-yellow-500/20 text-yellow-400">${c.by}</span><p class="text-slate-300 text-sm italic mt-1">"${c.text}"</p></div>`).join('')}
+                    </div>
+                </div>`;
+        }
 
-            if (hash && items[hash]) {
+        function router(manualId) {
+            const hash = manualId !== undefined ? manualId : location.hash.replace('#', '');
+            const vOrigins = document.getElementById('view-origins');
+            const vItems = document.getElementById('view-items');
+            const vDetail = document.getElementById('view-detail');
+
+            [vOrigins, vItems, vDetail].forEach(v => {
+                v.style.display = 'none';
+                v.classList.add('hidden-section');
+            });
+
+            if (!hash) {
+                renderOrigins();
+                show(vOrigins);
+            } else if (hash.startsWith('origin-')) {
+                const oid = hash.replace('origin-', '');
+                if (origins[oid]) {
+                    renderItemsInOrigin(oid);
+                    show(vItems);
+                } else { navigateTo(''); }
+            } else if (items[hash]) {
                 renderDetail(hash);
-                menuView.classList.add('hidden-section');
-                setTimeout(() => {
-                    menuView.style.display = 'none';
-                    detailView.style.display = 'block';
-                    window.scrollTo(0, 0);
-                    setTimeout(() => detailView.classList.remove('hidden-section'), 50);
-                }, 300);
+                show(vDetail);
             } else {
-                detailView.classList.add('hidden-section');
-                setTimeout(() => {
-                    detailView.style.display = 'none';
-                    menuView.style.display = 'block';
-                    renderMenu();
-                    setTimeout(() => menuView.classList.remove('hidden-section'), 50);
-                }, 300);
+                navigateTo('');
             }
         }
 
-        window.addEventListener('popstate', () => router());
+        function show(el) {
+            el.style.display = 'block';
+            setTimeout(() => {
+                el.classList.remove('hidden-section');
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, 50);
+            window.scrollTo(0, 0);
+        }
+
+        // Detectar cambios en la URL (para cuando los invitados escanean el QR)
+        window.addEventListener('hashchange', () => router());
+        // Al cargar, ejecutar el router para leer la URL inicial
         window.onload = () => router();
     </script>
-
-</body></html>
+</body>
+</html>
