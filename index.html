@@ -19,10 +19,15 @@
         .tag-anime { background: #581c87; color: #f3e8ff; } 
         .tag-cultura { background: #713f12; color: #fef9c3; } 
         .tag-simbolo { background: #7c2d12; color: #ffedd5; }
+        .tag-serie { background: #0369a1; color: #e0f2fe; }
+        .tag-juego { background: #15803d; color: #dcfce7; }
         
         .location-badge { background: #eab308; color: #422006; font-weight: 800; }
         .card-hover:hover { transform: translateY(-4px); border-color: rgba(234, 179, 8, 0.5); box-shadow: 0 10px 20px -10px rgba(234, 179, 8, 0.3); }
         blockquote { border-left: 3px solid #eab308; padding-left: 1rem; font-style: italic; color: #94a3b8; }
+        
+        /* Ajuste para transiciones fluidas de imágenes en el visualizador */
+        .lightbox-img { transition: opacity 0.3s ease-in-out; }
     </style>
 </head>
 <body class="min-h-screen bg-slate-950 selection:bg-yellow-500/30 pb-10">
@@ -46,7 +51,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
-                <span class="text-[10px] uppercase font-bold tracking-widest">Volver a Orígenes</span>
+                <span class="text-[10px] uppercase font-bold tracking-widest">Explorar otros mundos y referencias</span>
             </button>
             <div id="origin-info-header" class="mb-8"></div>
             <div id="items-grid" class="space-y-3"></div>
@@ -64,156 +69,281 @@
         </section>
     </div>
 
+    <!-- MODAL DE IMAGEN A TAMAÑO COMPLETO (LIGHTBOX) -->
+    <div id="lightbox" class="fixed inset-0 bg-slate-950/98 backdrop-blur-xl z-50 flex flex-col justify-between hidden opacity-0 transition-opacity duration-300">
+        <!-- Cabecera del Lightbox (Botón Volver y Contador) -->
+        <div class="p-4 flex items-center justify-between w-full max-w-md mx-auto">
+            <button onclick="closeLightbox()" class="flex items-center text-slate-400 hover:text-yellow-500 transition-all bg-slate-900/80 pl-2 pr-4 py-2 rounded-full border border-slate-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                <span class="text-[10px] uppercase font-bold tracking-widest">Atrás</span>
+            </button>
+            <div id="lightbox-counter" class="text-[10px] uppercase tracking-widest font-bold bg-slate-900/80 px-3 py-2 rounded-full border border-slate-800 text-yellow-500">
+                1 / 1
+            </div>
+        </div>
+
+        <!-- Cuerpo del Visualizador con las fotos y botones laterales -->
+        <div class="relative flex-1 flex items-center justify-center w-full max-w-md mx-auto px-2 select-none overflow-hidden" id="lightbox-touch-area">
+            <!-- Botón Izquierdo -->
+            <button onclick="prevLightboxImage(event)" class="absolute left-2 z-10 bg-slate-900/60 hover:bg-slate-900 border border-slate-800 text-yellow-500 hover:text-yellow-400 p-3 rounded-full transition-all focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
+            <!-- Imagen central -->
+            <div class="w-full h-[55vh] flex items-center justify-center p-2">
+                <img id="lightbox-current-img" class="lightbox-img max-w-full max-h-full object-contain rounded-xl shadow-2xl border border-slate-800" src="" alt="Vista completa">
+            </div>
+
+            <!-- Botón Derecho -->
+            <button onclick="nextLightboxImage(event)" class="absolute right-2 z-10 bg-slate-900/60 hover:bg-slate-900 border border-slate-800 text-yellow-500 hover:text-yellow-400 p-3 rounded-full transition-all focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Pie de foto: Título y descripción -->
+        <div class="p-6 bg-slate-900/50 border-t border-slate-900 w-full max-w-md mx-auto text-center">
+            <h3 id="lightbox-title" class="fandom-title text-lg font-bold text-yellow-500 mb-1">Título de la imagen</h3>
+            <p id="lightbox-desc" class="text-slate-400 text-xs italic">Descripción detallada de la foto para el evento.</p>
+        </div>
+    </div>
+
     <script>
         const origins = {
-          "hp": {
-                    "name": "Harry Potter",
-                    "emoji": "⚡",
-                    "summary": "El mundo mágico de la saga de libros (la autora la omitimos)\nUn niño descubre que es mago y entra en Hogwarts, una escuela de magia, mientras crece enfrentándose al mago oscuro que mató a sus padres, lord Voldemort.",
-                    "tags": [
-                              "Libro",
-                              "Película"
-                    ]
-          },
-          "lotr": {
-                    "name": "El Señor de los Anillos",
-                    "emoji": "🌋",
-                    "summary": "La obra épica de J.R.R. Tolkien sobre la Tierra Media.\nFantasía épica ambientada en la Tierra Media, donde hobbits, elfos y humanos luchan contra un señor oscuro mientras pequeños héroes intentan destruir un anillo capaz de dominar el mundo.",
-                    "tags": [
-                              "Libro",
-                              "Película"
-                    ]
-          },
-          "stormlight": {
-                    "name": "El Archivo de las Tormentas",
-                    "emoji": "⛈️",
-                    "summary": "Saga de fantasía épica escrita por Brandon Sanderson\nEn un planeta azotado por tormentas sobrenaturales, con guerras, sprens, magia basada en juramentos y personajes rotos intentando salvar su mundo.",
-                    "tags": [
-                              "Libro"
-                    ]
-          },
-          "origin_1778606197861": {
-                    "name": "Mistborn",
-                    "emoji": "🌫️",
-                    "summary": "Saga de fantasía épica escrito por Brandon Sanderson.\nUn imperio dominado por un tirano inmortal donde ciertas personas obtienen poderes mágicos consumiendo metales. Mezcla revolución, robos y fantasía oscura.",
-                    "tags": [
-                              "Libro"
-                    ]
-          },
-          "origin_1778606464538": {
-                    "name": "Las Crónicas de Narnia",
-                    "emoji": "🦁",
-                    "summary": "Saga escrita por C.S. Lewis\nNiños del mundo real atraviesan portales hacia Narnia, un reino mágico lleno de criaturas fantásticas, profecías y luchas entre el bien y el mal.",
-                    "tags": [
-                              "Libro",
-                              "Película"
-                    ]
-          },
-          "zelda": {
-                    "name": "The Legend of Zelda",
-                    "emoji": "🗡️",
-                    "summary": "La saga de videojuegos de Nintendo sobre el reino de Hyrule.\nAventuras fantásticas donde Link (si, Link, no Zelda, Zelda es la princesa) debe salvar Hyrule enfrentándose al mal, resolviendo puzles y explorando templos y tierras mágicas.",
-                    "tags": [
-                              "Videojuego"
-                    ]
-          },
-          "origin_1778606518802": {
-                    "name": "Game of Thrones",
-                    "emoji": "🐉",
-                    "summary": "Saga escrita por George R.R. Martin y adaptada a serie por HBO.\nFantasía política y brutal donde familias nobles luchan por el poder en un continente lleno de traiciones, guerras y dragones.",
-                    "tags": [
-                              "Libro",
-                              "Serie"
-                    ]
-          },
-          "origin_1778606614679": {
-                    "name": "Star Wars",
-                    "emoji": "🚀",
-                    "summary": "Saga de películas de George Lucas\nNaves, Imperios galácticos y caballeros Jedi que usan la Fuerza para combatir el lado oscuro.",
-                    "tags": [
-                              "Película"
-                    ]
-          },
-          "origin_1778606651084": {
-                    "name": "Borderlands",
-                    "emoji": "🔫",
-                    "summary": "Shooter caótico y humorístico ambientado en un planeta salvaje lleno de bandidos, corporaciones corruptas y montañas de armas absurdas.",
-                    "tags": [
-                              "Videojuego"
-                    ]
-          },
-          "origin_1778606700082": {
-                    "name": "Hollow Knight",
-                    "emoji": "🐛",
-                    "summary": "Juego de plataformas metroidvania, de Team Cherry. \nAventura melancólica en un reino subterráneo de insectos caído en ruinas, centrada en exploración, combate y misterio.",
-                    "tags": [
-                              "Videojuego"
-                    ]
-          },
-          "origin_1778606782074": {
-                    "name": "Pokemon",
-                    "emoji": "🎒",
-                    "summary": "Videojuego y Anime\nMundo donde humanos conviven con criaturas llamadas Pokémon, que entrenan y combaten mientras viven aventuras y amistades.",
-                    "tags": [
-                              "Videojuego",
-                              "Anime"
-                    ]
-          }
+    "hp": {
+        "name": "Harry Potter",
+        "emoji": "⚡",
+        "summary": "El mundo mágico de la saga de libros (la autora la omitimos)\nUn niño descubre que es mago y entra en Hogwarts, una escuela de magia, mientras crece enfrentándose al mago oscuro que mató a sus padres, lord Voldemort.",
+        "tags": [
+            "Libro",
+            "Película"
+        ]
+    },
+    "lotr": {
+        "name": "El Señor de los Anillos",
+        "emoji": "🌋",
+        "summary": "La obra épica de J.R.R. Tolkien sobre la Tierra Media.\nFantasía épica ambientada en la Tierra Media, donde hobbits, elfos y humanos luchan contra un señor oscuro mientras pequeños héroes intentan destruir un anillo capaz de dominar el mundo.",
+        "tags": [
+            "Libro",
+            "Película"
+        ]
+    },
+    "stormlight": {
+        "name": "El Archivo de las Tormentas",
+        "emoji": "⛈️",
+        "summary": "Saga de fantasía épica escrita por Brandon Sanderson\nEn un planeta azotado por tormentas sobrenaturales, con guerras, sprens, magia basada en juramentos y personajes rotos intentando salvar su mundo.",
+        "tags": [
+            "Libro"
+        ]
+    },
+    "origin_1778606197861": {
+        "name": "Mistborn",
+        "emoji": "🌫️",
+        "summary": "Saga de fantasía épica escrito por Brandon Sanderson.\nUn imperio dominado por un tirano inmortal donde ciertas personas obtienen poderes mágicos consumiendo metales. Mezcla revolución, robos y fantasía oscura.",
+        "tags": [
+            "Libro"
+        ]
+    },
+    "origin_1778606464538": {
+        "name": "Las Crónicas de Narnia",
+        "emoji": "🦁",
+        "summary": "Saga escrita por C.S. Lewis\nNiños del mundo real atraviesan portales hacia Narnia, un reino mágico lleno de criaturas fantásticas, profecías y luchas entre el bien y el mal.",
+        "tags": [
+            "Libro",
+            "Película"
+        ]
+    },
+    "zelda": {
+        "name": "The Legend of Zelda",
+        "emoji": "🗡️",
+        "summary": "La saga de videojuegos de Nintendo sobre el reino de Hyrule.\nAventuras fantásticas donde Link (si, Link, no Zelda, Zelda es la princesa) debe salvar Hyrule enfrentándose al mal, resolviendo puzles y explorando templos y tierras mágicas.",
+        "tags": [
+            "Videojuego"
+        ]
+    },
+    "origin_1778606518802": {
+        "name": "Game of Thrones",
+        "emoji": "🐉",
+        "summary": "Saga escrita por George R.R. Martin y adaptada a serie por HBO.\nFantasía política y brutal donde familias nobles luchan por el poder en un continente lleno de traiciones, guerras y dragones.",
+        "tags": [
+            "Libro",
+            "Serie"
+        ]
+    },
+    "origin_1778606614679": {
+        "name": "Star Wars",
+        "emoji": "🚀",
+        "summary": "Saga de películas de George Lucas\nNaves, Imperios galácticos y caballeros Jedi que usan la Fuerza para combatir el lado oscuro.",
+        "tags": [
+            "Película"
+        ]
+    },
+    "origin_1778606651084": {
+        "name": "Borderlands",
+        "emoji": "🔫",
+        "summary": "Shooter caótico y humorístico ambientado en un planeta salvaje lleno de bandidos, corporaciones corruptas y montañas de armas absurdas.",
+        "tags": [
+            "Videojuego"
+        ]
+    },
+    "origin_1778606700082": {
+        "name": "Hollow Knight",
+        "emoji": "🐛",
+        "summary": "Juego de plataformas metroidvania, de Team Cherry. \nAventura melancólica en un reino subterráneo de insectos caído en ruinas, centrada en exploración, combate y misterio.",
+        "tags": [
+            "Videojuego"
+        ]
+    },
+    "origin_1778606782074": {
+        "name": "Pokemon",
+        "emoji": "🎒",
+        "summary": "Videojuego y Anime\nMundo donde humanos conviven con criaturas llamadas Pokémon, que entrenan y combaten mientras viven aventuras y amistades.",
+        "tags": [
+            "Videojuego",
+            "Anime"
+        ]
+    },
+    "origin_1780931964385": {
+        "name": "Lego",
+        "emoji": "🧩",
+        "summary": "Una forma graciosa de estar todos en el mismo marco",
+        "tags": [
+            "Juego"
+        ]
+    }
 };
 
         const items = {
-          "the-shire": {
-                    "originId": "lotr",
-                    "title": "The Shire",
-                    "emoji": "🌿",
-                    "detail": "Hogar de los Hobbits, un lugar de paz y colinas verdes.",
-                    "quote": "En un agujero en el suelo, vivía un hobbit.",
-                    "location": "Nombre de Mesa",
-                    "comments": [
-                              {
-                                        "by": "Novio",
-                                        "text": "Nuestro lugar soñado."
-                              }
-                    ]
-          },
-          "felix-felicis": {
-                    "originId": "hp",
-                    "title": "Felix Felicis",
-                    "emoji": "✨",
-                    "detail": "Poción de suerte líquida que garantiza el éxito en todo.",
-                    "quote": "Te sentirás capaz de cualquier cosa.",
-                    "location": "Regalito de invitados",
-                    "comments": [
-                              {
-                                        "by": "Novia",
-                                        "text": "Un detalle mágico para todos."
-                              }
-                    ]
-          },
-          "roshar": {
-                    "originId": "stormlight",
-                    "title": "Roshar",
-                    "emoji": "🦀",
-                    "detail": "Mundo azotado por tormentas y caballeros radiantes.",
-                    "quote": "Viaje antes que destino.",
-                    "location": "Nombre de Mesa",
-                    "comments": [
-                              {
-                                        "by": "Novio",
-                                        "text": "La mejor construcción de mundo."
-                              }
-                    ]
-          }
+    "the-shire": {
+        "originId": "lotr",
+        "title": "The Shire",
+        "emoji": "🌿",
+        "detail": "Hogar de los Hobbits, un lugar de paz y colinas verdes.",
+        "quote": "En un agujero en el suelo, vivía un hobbit.",
+        "location": "Mesa de los Medianos",
+        "comments": [
+            {
+                "by": "Novio",
+                "text": "Nuestro lugar soñado."
+            }
+        ],
+        "photos": [
+            {
+                "url": "https://images.unsplash.com/photo-1500627869374-13cd993b1115?auto=format&fit=crop&q=80&w=1000",
+                "title": "Nuestra Comarca",
+                "desc": "Inspiración directa para la decoración de la mesa presidencial."
+            },
+            {
+                "url": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=1000",
+                "title": "La colina verde",
+                "desc": "Donde nos gustaría tener una casita Hobbit algún día."
+            },
+            {
+                "url": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1000",
+                "title": "Los bosques del hogar",
+                "desc": "Paz y tranquilidad perfectas."
+            }
+        ]
+    },
+    "felix-felicis": {
+        "originId": "hp",
+        "title": "Felix Felicis",
+        "emoji": "✨",
+        "detail": "Poción de suerte líquida que garantiza el éxito en todo.",
+        "quote": "Te sentirás capaz de cualquier cosa.",
+        "location": "Regalito de invitados",
+        "comments": [
+            {
+                "by": "Novia",
+                "text": "Un detalle mágico para todos."
+            }
+        ],
+        "photos": [
+            {
+                "url": "https://images.unsplash.com/photo-1512418491528-7336740c1e8f?auto=format&fit=crop&q=80&w=1000",
+                "title": "La botella de Felix",
+                "desc": "Así de bonitos quedarán los botecitos para regalar a los invitados."
+            }
+        ]
+    },
+    "roshar": {
+        "originId": "stormlight",
+        "title": "Roshar",
+        "emoji": "🦀",
+        "detail": "Mundo azotado por tormentas y caballeros radiantes.",
+        "quote": "Viaje antes que destino.",
+        "location": "Nombre de Mesa",
+        "comments": [
+            {
+                "by": "Novio",
+                "text": "La mejor construcción de mundo de Brandon Sanderson."
+            }
+        ],
+        "photos": []
+    },
+    "item_1780952213619": {
+        "originId": "origin_1780931964385",
+        "title": "Lego gestbook",
+        "emoji": "👩🏻‍🤝‍🧑🏻👩🏼‍🤝‍🧑🏼👨🏽‍🤝‍👨🏼👨🏼‍🤝‍👨🏻",
+        "detail": "Crea tu propio mini de Lego seleccionando: \n- 1 cabeza \n- el pelo gorro o sombrero que más te guste \n- un torso \n- unos pantalones \n- y algún item especial \nPon tu nombre en una pieza, y ya estás listo para formar parte del guestbook!",
+        "quote": "",
+        "location": "Guestbook",
+        "comments": [
+            {
+                "by": "Novia",
+                "text": "Si, he \"destrozado\" un espejo para hacer esto"
+            }
+        ],
+        "photos": [
+            {
+                "url": "https://raw.githubusercontent.com/Konekoni/guia_de_lore/main/lore/guestbook3.jpeg",
+                "title": "El espejo original",
+                "desc": ""
+            },
+            {
+                "url": "https://raw.githubusercontent.com/Konekoni/guia_de_lore/main/lore/guestbook2.jpeg",
+                "title": "Restaurando",
+                "desc": "Había que pegarle un buen lijado y quitar todo el espejo antes de poder convertirlo en nuestro marco para el lego"
+            },
+            {
+                "url": "https://raw.githubusercontent.com/Konekoni/guia_de_lore/main/lore/guestbook1.jpeg",
+                "title": "Restaurando",
+                "desc": ""
+            },
+            {
+                "url": "https://raw.githubusercontent.com/Konekoni/guia_de_lore/main/lore/guestbook5.jpeg",
+                "title": "Pintando",
+                "desc": ""
+            },
+            {
+                "url": "https://raw.githubusercontent.com/Konekoni/guia_de_lore/main/lore/guestbook4.jpeg",
+                "title": "Marco terminado!",
+                "desc": ""
+            }
+        ]
+    }
 };
 
+        // Estado global para el lightbox de imágenes
+        let currentPhotosArray = [];
+        let currentPhotoIndex = 0;
+
+        // Variables para gestos móviles en el visualizador
+        let touchStartX = 0;
+        let touchEndX = 0;
+
         function navigateTo(id) {
-            // Intentar actualizar el hash para que el QR funcione, pero capturar error si el entorno lo bloquea
             try {
                 window.location.hash = id;
             } catch (e) {
                 console.warn("Navegación por URL bloqueada, usando navegación interna.");
             }
-            router(id); // Ejecutar la lógica de cambio de vista manualmente
+            router(id); 
         }
 
         function getTagClass(tag) {
@@ -226,6 +356,10 @@
             grid.innerHTML = '';
             Object.keys(origins).forEach(id => {
                 const origin = origins[id];
+                
+                // Calcular el número de entradas para este universo
+                const itemCount = Object.values(items).filter(item => item.originId === id).length;
+                
                 const card = document.createElement('div');
                 card.className = `glass p-6 rounded-3xl cursor-pointer card-hover border border-slate-800 flex items-center gap-4`;
                 card.onclick = () => navigateTo(`origin-${id}`);
@@ -236,6 +370,10 @@
                         <div class="flex gap-1 mt-1">
                             ${origin.tags.map(t => `<span class="text-[7px] px-1.5 py-0.5 rounded uppercase font-bold ${getTagClass(t)}">${t}</span>`).join('')}
                         </div>
+                    </div>
+                    <div class="ml-auto flex flex-col items-center justify-center bg-slate-900/60 w-12 h-12 rounded-2xl border border-slate-800/80 shrink-0">
+                        <span class="text-sm font-bold text-yellow-500/90 leading-none">${itemCount}</span>
+                        <span class="text-[7px] uppercase tracking-widest text-slate-500 mt-1">${itemCount === 1 ? 'Ref' : 'Refs'}</span>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -248,7 +386,14 @@
             const grid = document.getElementById('items-grid');
             header.innerHTML = `<div class="text-center glass p-6 rounded-3xl border-b-2 border-yellow-500/50"><div class="text-5xl mb-3">${origin.emoji}</div><h2 class="fandom-title text-2xl font-bold text-yellow-500 mb-2">${origin.name}</h2></div>`;
             grid.innerHTML = '';
-            Object.keys(items).filter(k => items[k].originId === originId).forEach(itemId => {
+            
+            const matchedItems = Object.keys(items).filter(k => items[k].originId === originId);
+            if(matchedItems.length === 0) {
+                grid.innerHTML = `<div class="text-center text-slate-500 text-xs py-8">No hay referencias registradas en este universo aún.</div>`;
+                return;
+            }
+
+            matchedItems.forEach(itemId => {
                 const item = items[itemId];
                 const div = document.createElement('div');
                 div.className = `glass p-4 rounded-2xl flex items-center justify-between cursor-pointer card-hover border border-slate-800`;
@@ -263,25 +408,193 @@
             const origin = origins[item.originId];
             const container = document.getElementById('detail-content');
             document.getElementById('back-to-list').onclick = () => navigateTo(`origin-${item.originId}`);
-            document.getElementById('back-text').innerText = `Volver a ${origin.name}`;
+            document.getElementById('back-text').innerText = `Explorar más referencias de ${origin.name}`;
+
+            // Sección de Fotos (Dinámica)
+            let photosHtml = '';
+            const itemPhotos = item.photos || [];
+            
+            if (itemPhotos.length > 0) {
+                photosHtml = `
+                    <div class="glass p-5 rounded-3xl border border-slate-800 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-slate-500 text-[10px] font-bold uppercase">Fotos de referencia</h4>
+                            <span class="text-[9px] bg-yellow-500/10 text-yellow-500 px-2.5 py-0.5 rounded-full font-bold">${itemPhotos.length} ${itemPhotos.length === 1 ? 'foto' : 'fotos'}</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            ${itemPhotos.map((photo, index) => `
+                                <div class="relative group cursor-pointer overflow-hidden rounded-xl border border-slate-800/80 hover:border-yellow-500/40 transition-all duration-300" onclick="openLightbox('${itemId}', ${index})">
+                                    <div class="aspect-video w-full overflow-hidden bg-slate-900">
+                                        <img src="${photo.url}" alt="${photo.title || 'Foto'}" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-300" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=400';">
+                                    </div>
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80"></div>
+                                    <div class="absolute bottom-0 left-0 right-0 p-2 text-left">
+                                        <p class="text-[10px] font-semibold text-white truncate">${photo.title || 'Ver foto'}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
             container.innerHTML = `
                 <div class="space-y-6">
-                    <div class="text-center"><div class="text-6xl mb-4">${item.emoji}</div><h2 class="fandom-title text-3xl font-bold text-yellow-500">${item.title}</h2><div class="location-badge inline-block px-4 py-1 rounded-full text-[10px] uppercase mt-4">En: ${item.location}</div></div>
-                    <div class="glass p-5 rounded-3xl border-l-4 border-slate-700"><h4 class="text-slate-500 text-[10px] font-bold uppercase mb-1">Origen</h4><div class="font-bold text-white text-base">${origin.name}</div><p class="text-slate-400 text-xs italic">${origin.summary}</p></div>
-                    <div class="glass p-5 rounded-3xl border border-slate-800"><h4 class="text-yellow-600 text-[10px] font-bold uppercase mb-2">Detalle</h4><p class="text-slate-200 text-sm">${item.detail}</p></div>
-                    <blockquote class="my-6"><p class="text-slate-400 text-sm italic">"${item.quote}"</p></blockquote>
-                    <div class="glass p-5 rounded-3xl border-t border-slate-800 space-y-4">
-                        <h4 class="text-slate-500 text-[10px] font-bold uppercase">Opinión</h4>
-                        ${item.comments.map(c => `<div class="border-l-2 border-slate-800 pl-3"><span class="text-[9px] px-2 py-0.5 rounded font-bold uppercase bg-yellow-500/20 text-yellow-400">${c.by}</span><p class="text-slate-300 text-sm italic mt-1">"${c.text}"</p></div>`).join('')}
+                    <div class="text-center">
+                        <div class="text-6xl mb-4">${item.emoji}</div>
+                        <h2 class="fandom-title text-3xl font-bold text-yellow-500">${item.title}</h2>
+                        <div class="location-badge inline-block px-4 py-1 rounded-full text-[10px] uppercase mt-4">En: ${item.location}</div>
                     </div>
+                    
+                    <div class="glass p-5 rounded-3xl border-l-4 border-slate-700">
+                        <h4 class="text-slate-500 text-[10px] font-bold uppercase mb-1">Origen</h4>
+                        <div class="font-bold text-white text-base">${origin.name}</div>
+                        <p class="text-slate-400 text-xs italic mt-1">${origin.summary}</p>
+                    </div>
+                    
+                    <div class="glass p-5 rounded-3xl border border-slate-800">
+                        <h4 class="text-yellow-600 text-[10px] font-bold uppercase mb-2">Detalle</h4>
+                        <p class="text-slate-200 text-sm">${item.detail}</p>
+                    </div>
+                    
+                    <blockquote class="my-6">
+                        <p class="text-slate-400 text-sm italic">"${item.quote}"</p>
+                    </blockquote>
+                    
+                    <div class="glass p-5 rounded-3xl border border-slate-800 space-y-4">
+                        <h4 class="text-slate-500 text-[10px] font-bold uppercase">Opinión</h4>
+                        ${item.comments.map(c => `
+                            <div class="border-l-2 border-slate-800 pl-3">
+                                <span class="text-[9px] px-2 py-0.5 rounded font-bold uppercase bg-yellow-500/20 text-yellow-400">${c.by}</span>
+                                <p class="text-slate-300 text-sm italic mt-1">"${c.text}"</p>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <!-- NUEVO APARTADO DE FOTOS -->
+                    ${photosHtml}
                 </div>`;
         }
 
+        /* LÓGICA DEL VISUALIZADOR DE IMÁGENES (LIGHTBOX) */
+        function openLightbox(itemId, index) {
+            const item = items[itemId];
+            if (!item || !item.photos || item.photos.length === 0) return;
+
+            currentPhotosArray = item.photos;
+            currentPhotoIndex = index;
+
+            // Mostrar el modal
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('hidden');
+            setTimeout(() => {
+                lb.classList.remove('opacity-0');
+            }, 10);
+
+            // Bloquear scroll de fondo del body
+            document.body.style.overflow = 'hidden';
+
+            updateLightboxContent();
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.add('opacity-0');
+            
+            // Permitir scroll nuevamente
+            document.body.style.overflow = '';
+
+            setTimeout(() => {
+                lb.classList.add('hidden');
+            }, 300);
+        }
+
+        function updateLightboxContent() {
+            if (currentPhotosArray.length === 0) return;
+            const photo = currentPhotosArray[currentPhotoIndex];
+
+            const imgEl = document.getElementById('lightbox-current-img');
+            const titleEl = document.getElementById('lightbox-title');
+            const descEl = document.getElementById('lightbox-desc');
+            const counterEl = document.getElementById('lightbox-counter');
+
+            // Pequeño efecto de desvanecimiento al cambiar de imagen
+            imgEl.style.opacity = '0.3';
+            
+            setTimeout(() => {
+                imgEl.src = photo.url;
+                imgEl.onerror = function() {
+                    this.onerror = null;
+                    this.src = 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=800';
+                };
+                titleEl.innerText = photo.title || 'Sin título';
+                descEl.innerText = photo.desc || 'Sin descripción o comentario.';
+                counterEl.innerText = `${currentPhotoIndex + 1} / ${currentPhotosArray.length}`;
+                imgEl.style.opacity = '1';
+            }, 150);
+        }
+
+        function nextLightboxImage(event) {
+            if (event) event.stopPropagation();
+            if (currentPhotosArray.length <= 1) return;
+            currentPhotoIndex = (currentPhotoIndex + 1) % currentPhotosArray.length;
+            updateLightboxContent();
+        }
+
+        function prevLightboxImage(event) {
+            if (event) event.stopPropagation();
+            if (currentPhotosArray.length <= 1) return;
+            currentPhotoIndex = (currentPhotoIndex - 1 + currentPhotosArray.length) % currentPhotosArray.length;
+            updateLightboxContent();
+        }
+
+        // Soporte para gestos táctiles (Swipe) en la zona de la imagen
+        const touchArea = document.getElementById('lightbox-touch-area');
+        touchArea.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        touchArea.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipeGesture();
+        }, { passive: true });
+
+        function handleSwipeGesture() {
+            const threshold = 50; // Mínimo de pixeles para detectar swipe
+            if (touchEndX < touchStartX - threshold) {
+                // Desliza a la izquierda -> Siguiente foto
+                nextLightboxImage();
+            }
+            if (touchEndX > touchStartX + threshold) {
+                // Desliza a la derecha -> Foto anterior
+                prevLightboxImage();
+            }
+        }
+
+        // Navegación por teclado para mayor comodidad en PCs
+        document.addEventListener('keydown', (e) => {
+            const lb = document.getElementById('lightbox');
+            if (!lb.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') {
+                    nextLightboxImage();
+                } else if (e.key === 'ArrowLeft') {
+                    prevLightboxImage();
+                } else if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+            }
+        });
+
+
+        /* ENRUTADOR Y MANEJO DE VISTAS */
         function router(manualId) {
             const hash = manualId !== undefined ? manualId : location.hash.replace('#', '');
             const vOrigins = document.getElementById('view-origins');
             const vItems = document.getElementById('view-items');
             const vDetail = document.getElementById('view-detail');
+
+            // Asegurarnos de cerrar el visualizador al cambiar de ruta
+            closeLightbox();
 
             [vOrigins, vItems, vDetail].forEach(v => {
                 v.style.display = 'none';
