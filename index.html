@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archivo de Lore - Boda</title>
-
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Konekoni/guia_de_lore/main/lore/test_sello2_cropp_fin.png">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -28,8 +25,6 @@
         .location-badge { background: #eab308; color: #422006; font-weight: 800; }
         .card-hover:hover { transform: translateY(-4px); border-color: rgba(234, 179, 8, 0.5); box-shadow: 0 10px 20px -10px rgba(234, 179, 8, 0.3); }
         blockquote { border-left: 3px solid #eab308; padding-left: 1rem; font-style: italic; color: #94a3b8; }
-        
-        /* Ajuste para transiciones fluidas de imágenes en el visualizador */
         .lightbox-img { transition: opacity 0.3s ease-in-out; }
     </style>
 </head>
@@ -42,13 +37,11 @@
             <div class="h-px w-24 bg-gradient-to-r from-transparent via-slate-700 to-transparent mx-auto mt-6"></div>
         </header>
 
-        <!-- VISTA 1: MENÚ DE ORÍGENES -->
         <section id="view-origins" class="transition-page space-y-4">
             <h2 class="text-slate-400 text-[11px] uppercase tracking-widest font-bold mb-4 text-center">Explora por Universos</h2>
             <div id="origins-grid" class="grid grid-cols-1 gap-4"></div>
         </section>
 
-        <!-- VISTA 2: LISTA DE ITEMS POR ORIGEN -->
         <section id="view-items" class="hidden-section transition-page">
             <button onclick="navigateTo('')" class="mb-6 flex items-center text-slate-400 hover:text-yellow-500 transition-all bg-slate-900/80 pl-2 pr-4 py-2 rounded-full border border-slate-800">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -60,7 +53,6 @@
             <div id="items-grid" class="space-y-3"></div>
         </section>
 
-        <!-- VISTA 3: DETALLE DE ITEM -->
         <section id="view-detail" class="hidden-section transition-page">
             <button id="back-to-list" class="mb-6 flex items-center text-slate-400 hover:text-yellow-500 transition-all bg-slate-900/80 pl-2 pr-4 py-2 rounded-full border border-slate-800">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -72,9 +64,7 @@
         </section>
     </div>
 
-    <!-- MODAL DE IMAGEN A TAMAÑO COMPLETO (LIGHTBOX) -->
     <div id="lightbox" class="fixed inset-0 bg-slate-950/98 backdrop-blur-xl z-50 flex flex-col justify-between hidden opacity-0 transition-opacity duration-300">
-        <!-- Cabecera del Lightbox (Botón Volver y Contador) -->
         <div class="p-4 flex items-center justify-between w-full max-w-md mx-auto">
             <button onclick="closeLightbox()" class="flex items-center text-slate-400 hover:text-yellow-500 transition-all bg-slate-900/80 pl-2 pr-4 py-2 rounded-full border border-slate-800">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -87,21 +77,17 @@
             </div>
         </div>
 
-        <!-- Cuerpo del Visualizador con las fotos y botones laterales -->
         <div class="relative flex-1 flex items-center justify-center w-full max-w-md mx-auto px-2 select-none overflow-hidden" id="lightbox-touch-area">
-            <!-- Botón Izquierdo -->
             <button onclick="prevLightboxImage(event)" class="absolute left-2 z-10 bg-slate-900/60 hover:bg-slate-900 border border-slate-800 text-yellow-500 hover:text-yellow-400 p-3 rounded-full transition-all focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
                 </svg>
             </button>
 
-            <!-- Imagen central -->
             <div class="w-full h-[55vh] flex items-center justify-center p-2">
                 <img id="lightbox-current-img" class="lightbox-img max-w-full max-h-full object-contain rounded-xl shadow-2xl border border-slate-800" src="" alt="Vista completa">
             </div>
 
-            <!-- Botón Derecho -->
             <button onclick="nextLightboxImage(event)" class="absolute right-2 z-10 bg-slate-900/60 hover:bg-slate-900 border border-slate-800 text-yellow-500 hover:text-yellow-400 p-3 rounded-full transition-all focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
@@ -109,10 +95,9 @@
             </button>
         </div>
 
-        <!-- Pie de foto: Título y descripción -->
         <div class="p-6 bg-slate-900/50 border-t border-slate-900 w-full max-w-md mx-auto text-center">
             <h3 id="lightbox-title" class="fandom-title text-lg font-bold text-yellow-500 mb-1">Título de la imagen</h3>
-            <p id="lightbox-desc" class="text-slate-400 text-xs italic">Descripción detallada de la foto para el evento.</p>
+            <p id="lightbox-desc" class="text-slate-400 text-xs italic">Descripción de la foto.</p>
         </div>
     </div>
 
@@ -144,7 +129,7 @@
             "Libro"
         ]
     },
-    "origin_1778606197861": {
+    "mistborn": {
         "name": "Mistborn",
         "emoji": "🌫️",
         "summary": "Saga de fantasía épica escrito por Brandon Sanderson.\nUn imperio dominado por un tirano inmortal donde ciertas personas obtienen poderes mágicos consumiendo metales. Mezcla revolución, robos y fantasía oscura.",
@@ -152,7 +137,7 @@
             "Libro"
         ]
     },
-    "origin_1778606464538": {
+    "narnia": {
         "name": "Las Crónicas de Narnia",
         "emoji": "🦁",
         "summary": "Saga escrita por C.S. Lewis\nNiños del mundo real atraviesan portales hacia Narnia, un reino mágico lleno de criaturas fantásticas, profecías y luchas entre el bien y el mal.",
@@ -169,7 +154,15 @@
             "Videojuego"
         ]
     },
-    "origin_1778606518802": {
+    "animal_crossing": {
+        "name": "Animal Crossing",
+        "emoji": "🌳",
+        "summary": "Videojuegos tranquilos sobre vivir en un pueblo con tus vecinos animales, decorar tu casa, pescar, cazar bichos.",
+        "tags": [
+            "Videojuego"
+        ]
+    },
+    "got": {
         "name": "Game of Thrones",
         "emoji": "🐉",
         "summary": "Saga escrita por George R.R. Martin y adaptada a serie por HBO.\nFantasía política y brutal donde familias nobles luchan por el poder en un continente lleno de traiciones, guerras y dragones.",
@@ -178,7 +171,7 @@
             "Serie"
         ]
     },
-    "origin_1778606614679": {
+    "star_wars": {
         "name": "Star Wars",
         "emoji": "🚀",
         "summary": "Saga de películas de George Lucas\nNaves, Imperios galácticos y caballeros Jedi que usan la Fuerza para combatir el lado oscuro.",
@@ -186,7 +179,7 @@
             "Película"
         ]
     },
-    "origin_1778606651084": {
+    "borderlands": {
         "name": "Borderlands",
         "emoji": "🔫",
         "summary": "Shooter caótico y humorístico ambientado en un planeta salvaje lleno de bandidos, corporaciones corruptas y montañas de armas absurdas.",
@@ -194,7 +187,7 @@
             "Videojuego"
         ]
     },
-    "origin_1778606700082": {
+    "hollow_knight": {
         "name": "Hollow Knight",
         "emoji": "🐛",
         "summary": "Juego de plataformas metroidvania, de Team Cherry. \nAventura melancólica en un reino subterráneo de insectos caído en ruinas, centrada en exploración, combate y misterio.",
@@ -202,7 +195,7 @@
             "Videojuego"
         ]
     },
-    "origin_1778606782074": {
+    "pokemon": {
         "name": "Pokemon",
         "emoji": "🎒",
         "summary": "Videojuego y Anime\nMundo donde humanos conviven con criaturas llamadas Pokémon, que entrenan y combaten mientras viven aventuras y amistades.",
@@ -211,24 +204,29 @@
             "Anime"
         ]
     },
-    "origin_1780931964385": {
+    "lego": {
         "name": "Lego",
         "emoji": "🧩",
         "summary": "Una forma graciosa de estar todos en el mismo marco",
         "tags": [
             "Juego"
         ]
+    },
+    "japan": {
+        "name": "Japón y Anime",
+        "emoji": "🗾",
+        "summary": "Tanto la cultura japonesa como el mundo del manga y el anime son fascinantes.",
+        "tags": []
     }
 };
-
         const items = {
-    "the-shire": {
+    "the_shire": {
         "originId": "lotr",
         "title": "The Shire",
         "emoji": "🌿",
         "detail": "Hogar de los Hobbits, un lugar de paz y colinas verdes.",
         "quote": "En un agujero en el suelo, vivía un hobbit.",
-        "location": "Mesa de los Medianos",
+        "location": "Nombre de Mesa",
         "comments": [
             {
                 "by": "Novio",
@@ -253,13 +251,13 @@
             }
         ]
     },
-    "felix-felicis": {
+    "felix_felicis": {
         "originId": "hp",
         "title": "Felix Felicis",
         "emoji": "✨",
         "detail": "Poción de suerte líquida que garantiza el éxito en todo.",
-        "quote": "Te sentirás capaz de cualquier cosa.",
-        "location": "Regalito de invitados",
+        "quote": "Harry Potter y El Príncipe Mestizo",
+        "location": "Recuerdo para los invitados",
         "comments": [
             {
                 "by": "Novia",
@@ -277,8 +275,8 @@
     "roshar": {
         "originId": "stormlight",
         "title": "Roshar",
-        "emoji": "🦀",
-        "detail": "Mundo azotado por tormentas y caballeros radiantes.",
+        "emoji": "⚔️",
+        "detail": "Mundo azotado por tormentas, donde la naturaleza ha evolucionado hacia los crustáceos para adaptarse, y existían los caballeros radiantes.",
         "quote": "Viaje antes que destino.",
         "location": "Nombre de Mesa",
         "comments": [
@@ -289,10 +287,10 @@
         ],
         "photos": []
     },
-    "item_1780952213619": {
-        "originId": "origin_1780931964385",
+    "guesbook": {
+        "originId": "lego",
         "title": "Lego gestbook",
-        "emoji": "👩🏻‍🤝‍🧑🏻👩🏼‍🤝‍🧑🏼👨🏽‍🤝‍👨🏼👨🏼‍🤝‍👨🏻",
+        "emoji": "🧍‍♀️🧍🧍‍♂️🧍‍♀️",
         "detail": "Crea tu propio mini de Lego seleccionando: \n- 1 cabeza \n- el pelo gorro o sombrero que más te guste \n- un torso \n- unos pantalones \n- y algún item especial \nPon tu nombre en una pieza, y ya estás listo para formar parte del guestbook!",
         "quote": "",
         "location": "Guestbook",
@@ -329,14 +327,61 @@
                 "desc": ""
             }
         ]
+    },
+    "lightsaber": {
+        "originId": "star_wars",
+        "title": "Espadas láser",
+        "emoji": "🔴🔵🟢",
+        "detail": "Son las armas de los caballeros jedi (verde 🟢 y azul 🔵) o de los sith (rojo 🔴) en el mundo de star wars.",
+        "quote": "",
+        "location": "Premio de las misiones",
+        "comments": [],
+        "photos": []
+    },
+    "invitacion": {
+        "originId": "lotr",
+        "title": "Invitaciones",
+        "emoji": "✉️",
+        "detail": "Las invitaciones están basadas en el mundo de el señor de los anillos.",
+        "quote": "",
+        "location": "Invitaciones",
+        "comments": [],
+        "photos": []
+    },
+    "acceptance_letter": {
+        "originId": "hp",
+        "title": "Carta de admisión a Hogwarts",
+        "emoji": "✉️",
+        "detail": "En el mundo de Harry Potter, los niños de 11 años esperan su carta de admisión a Hogwarts, que los invita al primer año en la escuela de mágia y hechicería.",
+        "quote": "",
+        "location": "Minutas",
+        "comments": [],
+        "photos": []
+    },
+    "animes": {
+        "originId": "japan",
+        "title": "Mix de animes",
+        "emoji": "🌸",
+        "detail": "Con la inmensa cantidad de animes que hemos visto, no cabrían referencias a todos, asique hemos decidido rendir homenaje a este mundo con algunos paneles para vuestras tarjetas del árbol de tanabata.",
+        "quote": "",
+        "location": "Árbol de tanabata",
+        "comments": [],
+        "photos": []
+    },
+    "tanabata": {
+        "originId": "japan",
+        "title": "Festival de Tanabata",
+        "emoji": "🎋",
+        "detail": "El festival de tanabata es muy conocido en japón, es típico esribir tus deseos en pequeños papelitos que se atan con un lazo al bambú, para que se cumplan.",
+        "quote": "",
+        "location": "Árbol de tanabata",
+        "comments": [],
+        "photos": []
     }
 };
 
-        // Estado global para el lightbox de imágenes
         let currentPhotosArray = [];
         let currentPhotoIndex = 0;
-
-        // Variables para gestos móviles en el visualizador
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -344,13 +389,14 @@
             try {
                 window.location.hash = id;
             } catch (e) {
-                console.warn("Navegación por URL bloqueada, usando navegación interna.");
+                console.warn("Navegación bloqueada.");
             }
             router(id); 
         }
 
         function getTagClass(tag) {
             const t = tag.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            return `tag-dots`; // Generación de tag dinámico compatible
             return `tag-${t}`;
         }
 
@@ -359,8 +405,6 @@
             grid.innerHTML = '';
             Object.keys(origins).forEach(id => {
                 const origin = origins[id];
-                
-                // Calcular el número de entradas para este universo
                 const itemCount = Object.values(items).filter(item => item.originId === id).length;
                 
                 const card = document.createElement('div');
@@ -392,7 +436,7 @@
             
             const matchedItems = Object.keys(items).filter(k => items[k].originId === originId);
             if(matchedItems.length === 0) {
-                grid.innerHTML = `<div class="text-center text-slate-500 text-xs py-8">No hay referencias registradas en este universo aún.</div>`;
+                grid.innerHTML = `<div class="text-center text-slate-500 text-xs py-8">No hay referencias registradas.</div>`;
                 return;
             }
 
@@ -413,7 +457,6 @@
             document.getElementById('back-to-list').onclick = () => navigateTo(`origin-${item.originId}`);
             document.getElementById('back-text').innerText = `Explorar más referencias de ${origin.name}`;
 
-            // Sección de Fotos (Dinámica)
             let photosHtml = '';
             const itemPhotos = item.photos || [];
             
@@ -474,12 +517,10 @@
                         `).join('')}
                     </div>
 
-                    <!-- NUEVO APARTADO DE FOTOS -->
                     ${photosHtml}
                 </div>`;
         }
 
-        /* LÓGICA DEL VISUALIZADOR DE IMÁGENES (LIGHTBOX) */
         function openLightbox(itemId, index) {
             const item = items[itemId];
             if (!item || !item.photos || item.photos.length === 0) return;
@@ -487,29 +528,18 @@
             currentPhotosArray = item.photos;
             currentPhotoIndex = index;
 
-            // Mostrar el modal
             const lb = document.getElementById('lightbox');
             lb.classList.remove('hidden');
-            setTimeout(() => {
-                lb.classList.remove('opacity-0');
-            }, 10);
-
-            // Bloquear scroll de fondo del body
+            setTimeout(() => { lb.classList.remove('opacity-0'); }, 10);
             document.body.style.overflow = 'hidden';
-
             updateLightboxContent();
         }
 
         function closeLightbox() {
             const lb = document.getElementById('lightbox');
             lb.classList.add('opacity-0');
-            
-            // Permitir scroll nuevamente
             document.body.style.overflow = '';
-
-            setTimeout(() => {
-                lb.classList.add('hidden');
-            }, 300);
+            setTimeout(() => { lb.classList.add('hidden'); }, 300);
         }
 
         function updateLightboxContent() {
@@ -521,7 +551,6 @@
             const descEl = document.getElementById('lightbox-desc');
             const counterEl = document.getElementById('lightbox-counter');
 
-            // Pequeño efecto de desvanecimiento al cambiar de imagen
             imgEl.style.opacity = '0.3';
             
             setTimeout(() => {
@@ -531,8 +560,8 @@
                     this.src = 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=800';
                 };
                 titleEl.innerText = photo.title || 'Sin título';
-                descEl.innerText = photo.desc || 'Sin descripción o comentario.';
-                counterEl.innerText = `${currentPhotoIndex + 1} / ${currentPhotosArray.length}`;
+                descEl.innerText = photo.desc || 'Sin descripción.';
+                counterEl.innerText = (currentPhotoIndex + 1) + " / " + currentPhotosArray.length;
                 imgEl.style.opacity = '1';
             }, 150);
         }
@@ -551,7 +580,6 @@
             updateLightboxContent();
         }
 
-        // Soporte para gestos táctiles (Swipe) en la zona de la imagen
         const touchArea = document.getElementById('lightbox-touch-area');
         touchArea.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
@@ -563,40 +591,26 @@
         }, { passive: true });
 
         function handleSwipeGesture() {
-            const threshold = 50; // Mínimo de pixeles para detectar swipe
-            if (touchEndX < touchStartX - threshold) {
-                // Desliza a la izquierda -> Siguiente foto
-                nextLightboxImage();
-            }
-            if (touchEndX > touchStartX + threshold) {
-                // Desliza a la derecha -> Foto anterior
-                prevLightboxImage();
-            }
+            const threshold = 50;
+            if (touchEndX < touchStartX - threshold) { nextLightboxImage(); }
+            if (touchEndX > touchStartX + threshold) { prevLightboxImage(); }
         }
 
-        // Navegación por teclado para mayor comodidad en PCs
         document.addEventListener('keydown', (e) => {
             const lb = document.getElementById('lightbox');
             if (!lb.classList.contains('hidden')) {
-                if (e.key === 'ArrowRight') {
-                    nextLightboxImage();
-                } else if (e.key === 'ArrowLeft') {
-                    prevLightboxImage();
-                } else if (e.key === 'Escape') {
-                    closeLightbox();
-                }
+                if (e.key === 'ArrowRight') { nextLightboxImage(); }
+                else if (e.key === 'ArrowLeft') { prevLightboxImage(); }
+                else if (e.key === 'Escape') { closeLightbox(); }
             }
         });
 
-
-        /* ENRUTADOR Y MANEJO DE VISTAS */
         function router(manualId) {
             const hash = manualId !== undefined ? manualId : location.hash.replace('#', '');
             const vOrigins = document.getElementById('view-origins');
             const vItems = document.getElementById('view-items');
             const vDetail = document.getElementById('view-detail');
 
-            // Asegurarnos de cerrar el visualizador al cambiar de ruta
             closeLightbox();
 
             [vOrigins, vItems, vDetail].forEach(v => {
@@ -631,9 +645,7 @@
             window.scrollTo(0, 0);
         }
 
-        // Detectar cambios en la URL (para cuando los invitados escanean el QR)
         window.addEventListener('hashchange', () => router());
-        // Al cargar, ejecutar el router para leer la URL inicial
         window.onload = () => router();
     </script>
 </body>
